@@ -1,9 +1,6 @@
 import * as util from 'skruv/utilityTypes'
 import { Element, HTMLElement, MathMLElement, HTMLInputElement, HTMLOptionElement } from 'skruv/utils/minidom'
-export type innerKey = any
-
 /* React Compatability */
-
 interface ReactHTMLGlobalAttributes {
   'className'?: string | undefined
   'id'?: string | undefined
@@ -19,7 +16,7 @@ interface ReactHTMLGlobalAttributes {
   'inert'?: boolean | undefined
   'inputMode'?: 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search' | undefined
   // "is" is special, see the spec
-  '// is'?: string
+  // 'is'?: string
   'itemID'?: URL | undefined
   'itemProp'?: string | undefined
   'itemRef'?: string | undefined // this needs to be a space separated list of valid ID's in the document
@@ -34,7 +31,6 @@ interface ReactHTMLGlobalAttributes {
   'title'?: string | undefined
   'translate'?: 'yes' | '' | 'no' | undefined
 }
-
 interface ReactSVGGlobalAttributes {
   'className'?: string | undefined
   'style'?: string | undefined
@@ -48,7 +44,6 @@ interface ReactSVGGlobalAttributes {
   'requiredFeatures'?: string | undefined
   'systemLanguage'?: string | undefined
 }
-
 interface ReactSVGPresentationAttributes {
   'alignmentBaseline'?: string | number | undefined;
   'baselineShift'?: string | number | undefined;
@@ -113,7 +108,6 @@ interface ReactSVGPresentationAttributes {
   'wordSpacing'?: string | number | undefined;
   'writingMode'?: string | number | undefined;
 }
-
 interface ReactSVGFilterAttributes {
   'height'?: string | number | undefined;
   'result'?: string | number | undefined;
@@ -128,7 +122,6 @@ interface ReactSVGFilterAttributes {
   'exponent'?: string | number | undefined;
   'offset'?: string | number | undefined;
 }
-
 interface ReactSVGAnimationAttributes {
   'href'?: string | number | undefined;
   'attributeType'?: string | number | undefined;
@@ -155,8 +148,7 @@ interface ReactSVGAnimationAttributes {
   'additive'?: string | number | undefined;
   'accumulate'?: string | number | undefined;
 }
-
-//React does not have built in support for MathML so these are unchanged
+// React does not have built in support for MathML so these are unchanged
 interface ReactMathMLGlobalAttributes {
   'class'?: string | number | undefined;
   'dir'?: string | number | undefined;
@@ -172,21 +164,18 @@ interface ReactMathMLGlobalAttributes {
 }
 
 interface ReactAtomGlobalAttributes { }
-
 interface ReactSitemapGlobalAttributes { }
 
 type ReactHTMLEvents<T> = { [key in keyof HTMLElementEventMap as `on${Capitalize<key>}`]?: ((e: (HTMLElementEventMap[key] & { currentTarget: T })) => void) }
 type ReactSVGEvents<T> = { [key in keyof SVGElementEventMap as `on${Capitalize<key>}`]?: ((e: (SVGElementEventMap[key] & { currentTarget: T })) => void) }
 type ReactMathMlEvents<T> = { [key in keyof MathMLElementEventMap as `on${Capitalize<key>}`]?: ((e: (MathMLElementEventMap[key] & { currentTarget: T })) => void) }
-
 type ReactHTMLAttributes<T, A> = A & util.CustomEvents<T> & ReactHTMLEvents<T> & util.DataAttributes & util.SkruvAdditionalAttributes<T> & ReactHTMLGlobalAttributes & { isSkruvDom?: false }
 type ReactSVGAttributes<T, A> = A & util.CustomEvents<T> & ReactSVGEvents<T> & util.DataAttributes & util.SkruvAdditionalAttributes<T> & ReactSVGGlobalAttributes & { isSkruvDom?: false }
 type ReactMathMLAttributes<T, A> = A & util.CustomEvents<T> & ReactMathMlEvents<T> & util.DataAttributes & util.SkruvAdditionalAttributes<T> & ReactMathMLGlobalAttributes & { isSkruvDom?: false }
 type ReactAtomAttributes<T, A> = A & { isSkruvDom?: false }
 type ReactSitemapAttributes<T, A> = A & { isSkruvDom?: false }
-
 /** The <html> HTML element represents the root (top-level element) of an HTML document, so it is also referred to as the root element. All other elements must be descendants of this element. */
-export type SkruvReactHtmlHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHtmlElement, {
+export type ReactSkruvHtmlHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHtmlElement, {
   /**
    * Specifies the URI of a resource manifest indicating resources that should be cached locally.
    */
@@ -201,9 +190,8 @@ export type SkruvReactHtmlHTMLAttributes = util.AsyncContent<ReactHTMLAttributes
   'xmlns'?: string | number | boolean | false
 }>>
 
-
 /** The <base> HTML element specifies the base URL to use for all relative URLs in a document. There can be only one <base> element in a document. */
-export type SkruvReactBaseHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLBaseElement, {
+export type ReactSkruvBaseHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLBaseElement, {
   /**
    * The base URL to be used throughout the document for relative URLs. Absolute and relative URLs are allowed.
    */
@@ -222,22 +210,19 @@ export type SkruvReactBaseHTMLAttributes = util.AsyncContent<ReactHTMLAttributes
   'target'?: string | false
 }>>
 
-
 /** The <head> HTML element contains machine-readable information (metadata) about the document, like its title, scripts, and style sheets. */
-export type SkruvReactHeadHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadElement, {
+export type ReactSkruvHeadHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadElement, {
   /**
    * The URIs of one or more metadata profiles, separated by white space.
    */
   'profile'?: string | number | boolean | false
 }>>
 
-
 /** The <title> HTML element defines the document's title that is shown in a browser's title bar or a page's tab. It only contains text; tags within the element are ignored. */
-export type SkruvReactTitleHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTitleElement, {}>>
-
+export type ReactSkruvTitleHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTitleElement, {}>>
 
 /** The <script> HTML element is used to embed executable code or data; this is typically used to embed or refer to JavaScript code. The <script> element can also be used with other languages, such as WebGL's GLSL shader programming language and JSON. */
-export type SkruvReactScriptHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLScriptElement, {
+export type ReactSkruvScriptHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLScriptElement, {
   /**
    * For classic scripts, if the async attribute is present, then the classic script will be fetched in parallel to parsing and evaluated as soon as it is available.
    * 
@@ -370,9 +355,8 @@ export type SkruvReactScriptHTMLAttributes = util.AsyncContent<ReactHTMLAttribut
   'blocking'?: 'render' | false
 }>>
 
-
 /** The <style> HTML element contains style information for a document, or part of a document. It contains CSS, which is applied to the contents of the document containing the <style> element. */
-export type SkruvReactStyleHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLStyleElement, {
+export type ReactSkruvStyleHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLStyleElement, {
   /**
    * This attribute defines which media the style should be applied to. Its value is a media query, which defaults to all if the attribute is missing.
    */
@@ -393,11 +377,10 @@ export type SkruvReactStyleHTMLAttributes = util.AsyncContent<ReactHTMLAttribute
   'blocking'?: 'render' | false
 }>>
 
-
 /** The <link> HTML element specifies relationships between the current document and an external resource.
  * 
  * This element is most commonly used to link to stylesheets, but is also used to establish site icons (both "favicon" style icons and icons for the home screen and apps on mobile devices) among other things. */
-export type SkruvReactLinkHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLLinkElement, {
+export type ReactSkruvLinkHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLLinkElement, {
   /**
    * This attribute is required when rel="preload" has been set on the <link> element, optional when rel="modulepreload" has been set, and otherwise should not be used.
    * 
@@ -632,9 +615,8 @@ export type SkruvReactLinkHTMLAttributes = util.AsyncContent<ReactHTMLAttributes
   'blocking'?: 'render' | false
 }>>
 
-
 /** The <meta> HTML element represents metadata that cannot be represented by other HTML meta-related elements, like <base>, <link>, <script>, <style> or <title>. */
-export type SkruvReactMetaHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLMetaElement, {
+export type ReactSkruvMetaHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLMetaElement, {
   /**
    * This attribute declares the document's character encoding. If the attribute is present, its value must be an ASCII case-insensitive match for the string "utf-8", because UTF-8 is the only valid encoding for HTML5 documents. <meta> elements which declare a character encoding must be located entirely within the first 1024 bytes of the document.
    */
@@ -691,119 +673,93 @@ export type SkruvReactMetaHTMLAttributes = util.AsyncContent<ReactHTMLAttributes
   'name'?: string | false
 }>>
 
-
 /** The <body> HTML element represents the content of an HTML document. There can be only one <body> element in a document. */
-export type SkruvReactBodyHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLBodyElement, {}>>
-
+export type ReactSkruvBodyHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLBodyElement, {}>>
 
 /** The <address> HTML element indicates that the enclosed HTML provides contact information for a person or people, or for an organization. */
-export type SkruvReactAddressHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvAddressHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <article> HTML element represents a self-contained composition in a document, page, application, or site, which is intended to be independently distributable or reusable (e.g., in syndication). Examples include: a forum post, a magazine or newspaper article, or a blog entry, a product card, a user-submitted comment, an interactive widget or gadget, or any other independent item of content. */
-export type SkruvReactArticleHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvArticleHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <aside> HTML element represents a portion of a document whose content is only indirectly related to the document's main content. Asides are frequently presented as sidebars or call-out boxes. */
-export type SkruvReactAsideHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvAsideHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <footer> HTML element represents a footer for its nearest ancestor sectioning content or sectioning root element. A <footer> typically contains information about the author of the section, copyright data or links to related documents. */
-export type SkruvReactFooterHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
-
-/** The <h1> to <h6> HTML elements represent six levels of section headings. <h1> is the highest section level and <h6> is the lowest. */
-export type SkruvReactH1HTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadingElement, {}>>
-
+export type ReactSkruvFooterHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <h1> to <h6> HTML elements represent six levels of section headings. <h1> is the highest section level and <h6> is the lowest. */
-export type SkruvReactH2HTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadingElement, {}>>
-
-
-/** The <h1> to <h6> HTML elements represent six levels of section headings. <h1> is the highest section level and <h6> is the lowest. */
-export type SkruvReactH3HTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadingElement, {}>>
-
+export type ReactSkruvH1HTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadingElement, {}>>
 
 /** The <h1> to <h6> HTML elements represent six levels of section headings. <h1> is the highest section level and <h6> is the lowest. */
-export type SkruvReactH4HTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadingElement, {}>>
-
-
-/** The <h1> to <h6> HTML elements represent six levels of section headings. <h1> is the highest section level and <h6> is the lowest. */
-export type SkruvReactH5HTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadingElement, {}>>
-
+export type ReactSkruvH2HTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadingElement, {}>>
 
 /** The <h1> to <h6> HTML elements represent six levels of section headings. <h1> is the highest section level and <h6> is the lowest. */
-export type SkruvReactH6HTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadingElement, {}>>
+export type ReactSkruvH3HTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadingElement, {}>>
 
+/** The <h1> to <h6> HTML elements represent six levels of section headings. <h1> is the highest section level and <h6> is the lowest. */
+export type ReactSkruvH4HTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadingElement, {}>>
+
+/** The <h1> to <h6> HTML elements represent six levels of section headings. <h1> is the highest section level and <h6> is the lowest. */
+export type ReactSkruvH5HTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadingElement, {}>>
+
+/** The <h1> to <h6> HTML elements represent six levels of section headings. <h1> is the highest section level and <h6> is the lowest. */
+export type ReactSkruvH6HTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHeadingElement, {}>>
 
 /** The <header> HTML element represents introductory content, typically a group of introductory or navigational aids. It may contain some heading elements but also a logo, a search form, an author name, and other elements. */
-export type SkruvReactHeaderHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvHeaderHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <hgroup> HTML element represents a heading and related content. It groups a single <h1>–<h6> element with one or more <p>. */
-export type SkruvReactHgroupHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvHgroupHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <main> HTML element represents the dominant content of the <body> of a document. The main content area consists of content that is directly related to or expands upon the central topic of a document, or the central functionality of an application. */
-export type SkruvReactMainHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvMainHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <nav> HTML element represents a section of a page whose purpose is to provide navigation links, either within the current document or to other documents. Common examples of navigation sections are menus, tables of contents, and indexes. */
-export type SkruvReactNavHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvNavHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <section> HTML element represents a generic standalone section of a document, which doesn't have a more specific semantic element to represent it. Sections should always have a heading, with very few exceptions. */
-export type SkruvReactSectionHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvSectionHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <search> HTML element is a container representing the parts of the document or application with form controls or other content related to performing a search or filtering operation. The <search> element semantically identifies the purpose of the element's contents as having search or filtering capabilities. The search or filtering functionality can be for the website or application, the current web page or document, or the entire Internet or subsection thereof. */
-export type SkruvReactSearchHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLUnknownElement, {}>>
-
+export type ReactSkruvSearchHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLUnknownElement, {}>>
 
 /** The <blockquote> HTML element indicates that the enclosed text is an extended quotation. Usually, this is rendered visually by indentation (see Notes for how to change it). A URL for the source of the quotation may be given using the cite attribute, while a text representation of the source can be given using the <cite> element. */
-export type SkruvReactBlockquoteHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLQuoteElement, {
+export type ReactSkruvBlockquoteHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLQuoteElement, {
   /**
    * A URL that designates a source document or message for the information quoted. This attribute is intended to point to information explaining the context or the reference for the quote.
    */
   'cite'?: string | false
 }>>
 
-
 /** The <cite> HTML element is used to mark up the title of a cited creative work. The reference may be in an abbreviated form according to context-appropriate conventions related to citation metadata. */
-export type SkruvReactCiteHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvCiteHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <dd> HTML element provides the description, definition, or value for the preceding term (<dt>) in a description list (<dl>). */
-export type SkruvReactDdHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {
+export type ReactSkruvDdHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {
   /**
    * If the value of this attribute is set to yes, the definition text will not wrap. The default value is no.
    */
   'nowrap'?: string | number | boolean | false
 }>>
 
-
 /** The <dt> HTML element specifies a term in a description or definition list, and as such must be used inside a <dl> element. It is usually followed by a <dd> element; however, multiple <dt> elements in a row indicate several terms that are all defined by the immediate next <dd> element. */
-export type SkruvReactDtHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvDtHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <dl> HTML element represents a description list. The element encloses a list of groups of terms (specified using the <dt> element) and descriptions (provided by <dd> elements). Common uses for this element are to implement a glossary or to display metadata (a list of key-value pairs). */
-export type SkruvReactDlHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLDListElement, {}>>
-
+export type ReactSkruvDlHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLDListElement, {}>>
 
 /** The <div> HTML element is the generic container for flow content. It has no effect on the content or layout until styled in some way using CSS (e.g. styling is directly applied to it, or some kind of layout model like Flexbox is applied to its parent element). */
-export type SkruvReactDivHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLDivElement, {}>>
-
+export type ReactSkruvDivHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLDivElement, {}>>
 
 /** The <figcaption> HTML element represents a caption or legend describing the rest of the contents of its parent <figure> element. */
-export type SkruvReactFigcaptionHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvFigcaptionHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <figure> HTML element represents self-contained content, potentially with an optional caption, which is specified using the <figcaption> element. The figure, its caption, and its contents are referenced as a single unit. */
-export type SkruvReactFigureHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvFigureHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <hr> HTML element represents a thematic break between paragraph-level elements: for example, a change of scene in a story, or a shift of topic within a section. */
-export type SkruvReactHrHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHRElement, {
+export type ReactSkruvHrHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLHRElement, {
   /**
    * Sets the alignment of the rule on the page. If no value is specified, the default value is left.
    */
@@ -826,18 +782,16 @@ export type SkruvReactHrHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<H
   'width'?: number | string | false
 }>>
 
-
 /** The <li> HTML element is used to represent an item in a list. It must be contained in a parent element: an ordered list (<ol>), an unordered list (<ul>), or a menu (<menu>). In menus and unordered lists, list items are usually displayed using bullet points. In ordered lists, they are usually displayed with an ascending counter on the left, such as a number or letter. */
-export type SkruvReactLiHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLLIElement, {
+export type ReactSkruvLiHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLLIElement, {
   /**
    * This integer attribute indicates the current ordinal value of the list item as defined by the <ol> element. The only allowed value for this attribute is a number, even if the list is displayed with Roman numerals or letters. List items that follow this one continue numbering from the value set. The value attribute has no meaning for unordered lists (<ul>) or for menus (<menu>).
    */
   'value'?: number | string | false
 }>>
 
-
 /** The <ol> HTML element represents an ordered list of items — typically rendered as a numbered list. */
-export type SkruvReactOlHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLOListElement, {
+export type ReactSkruvOlHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLOListElement, {
   /**
    * This Boolean attribute specifies that the list's items are in reverse order. Items will be numbered from high to low.
    */
@@ -848,25 +802,20 @@ export type SkruvReactOlHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<H
   'start'?: number | false
 }>>
 
-
 /** The <ul> HTML element represents an unordered list of items, typically rendered as a bulleted list. */
-export type SkruvReactUlHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLUListElement, {}>>
-
+export type ReactSkruvUlHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLUListElement, {}>>
 
 /** The <menu> HTML element is described in the HTML specification as a semantic alternative to <ul>, but treated by browsers (and exposed through the accessibility tree) as no different than <ul>. It represents an unordered list of items (which are represented by <li> elements). */
-export type SkruvReactMenuHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLMenuElement, {}>>
-
+export type ReactSkruvMenuHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLMenuElement, {}>>
 
 /** The <p> HTML element represents a paragraph. Paragraphs are usually represented in visual media as blocks of text separated from adjacent blocks by blank lines and/or first-line indentation, but HTML paragraphs can be any structural grouping of related content, such as images or form fields. */
-export type SkruvReactPHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLParagraphElement, {}>>
-
+export type ReactSkruvPHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLParagraphElement, {}>>
 
 /** The <pre> HTML element represents preformatted text which is to be presented exactly as written in the HTML file. The text is typically rendered using a non-proportional, or monospaced, font. Whitespace inside this element is displayed as written. */
-export type SkruvReactPreHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLPreElement, {}>>
-
+export type ReactSkruvPreHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLPreElement, {}>>
 
 /** The <a> HTML element (or anchor element), with its href attribute, creates a hyperlink to web pages, files, email addresses, locations in the same page, or anything else a URL can address. */
-export type SkruvReactAHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLAnchorElement, {
+export type ReactSkruvAHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLAnchorElement, {
   /**
    * Causes the browser to treat the linked URL as a download. Can be used with or without a filename value:
    * 
@@ -961,21 +910,17 @@ export type SkruvReactAHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HT
   'type'?: string | false
 }>>
 
-
 /** The <abbr> HTML element represents an abbreviation or acronym. */
-export type SkruvReactAbbrHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvAbbrHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <b> HTML element is used to draw the reader's attention to the element's contents, which are not otherwise granted special importance. This was formerly known as the Boldface element, and most browsers still draw the text in boldface. However, you should not use <b> for styling text or granting importance. If you wish to create boldface text, you should use the CSS font-weight property. If you wish to indicate an element is of special importance, you should use the <strong> element. */
-export type SkruvReactBHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvBHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <bdi> HTML element tells the browser's bidirectional algorithm to treat the text it contains in isolation from its surrounding text. It's particularly useful when a website dynamically inserts some text and doesn't know the directionality of the text being inserted. */
-export type SkruvReactBdiHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvBdiHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <bdo> HTML element overrides the current directionality of text, so that the text within is rendered in a different direction. */
-export type SkruvReactBdoHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {
+export type ReactSkruvBdoHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {
   /**
    * The direction in which text should be rendered in this element's contents. Possible values are:
    * 
@@ -986,116 +931,92 @@ export type SkruvReactBdoHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<
   'dir'?: string | false
 }>>
 
-
 /** The <br> HTML element produces a line break in text (carriage-return). It is useful for writing a poem or an address, where the division of lines is significant. */
-export type SkruvReactBrHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLBRElement, {}>>
-
+export type ReactSkruvBrHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLBRElement, {}>>
 
 /** The <code> HTML element displays its contents styled in a fashion intended to indicate that the text is a short fragment of computer code. By default, the content text is displayed using the user agent's default monospace font. */
-export type SkruvReactCodeHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvCodeHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <data> HTML element links a given piece of content with a machine-readable translation. If the content is time- or date-related, the <time> element must be used. */
-export type SkruvReactDataHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLDataElement, {
+export type ReactSkruvDataHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLDataElement, {
   /**
    * This attribute specifies the machine-readable translation of the content of the element.
    */
   'value'?: number | string | false
 }>>
 
-
 /** The <dfn> HTML element is used to indicate the term being defined within the context of a definition phrase or sentence. The ancestor <p> element, the <dt>/<dd> pairing, or the nearest <section> ancestor of the <dfn> element, is considered to be the definition of the term. */
-export type SkruvReactDfnHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvDfnHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <em> HTML element marks text that has stress emphasis. The <em> element can be nested, with each level of nesting indicating a greater degree of emphasis. */
-export type SkruvReactEmHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvEmHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <i> HTML element represents a range of text that is set off from the normal text for some reason, such as idiomatic text, technical terms, taxonomical designations, among others. Historically, these have been presented using italicized type, which is the original source of the <i> naming of this element. */
-export type SkruvReactIHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvIHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <kbd> HTML element represents a span of inline text denoting textual user input from a keyboard, voice input, or any other text entry device. By convention, the user agent defaults to rendering the contents of a <kbd> element using its default monospace font, although this is not mandated by the HTML standard. */
-export type SkruvReactKbdHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvKbdHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <mark> HTML element represents text which is marked or highlighted for reference or notation purposes due to the marked passage's relevance in the enclosing context. */
-export type SkruvReactMarkHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvMarkHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <q> HTML element indicates that the enclosed text is a short inline quotation. Most modern browsers implement this by surrounding the text in quotation marks. This element is intended for short quotations that don't require paragraph breaks; for long quotations use the <blockquote> element. */
-export type SkruvReactQHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLQuoteElement, {
+export type ReactSkruvQHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLQuoteElement, {
   /**
    * The value of this attribute is a URL that designates a source document or message for the information quoted. This attribute is intended to point to information explaining the context or the reference for the quote.
    */
   'cite'?: string | false
 }>>
 
-
 /** The <rp> HTML element is used to provide fall-back parentheses for browsers that do not support display of ruby annotations using the <ruby> element. One <rp> element should enclose each of the opening and closing parentheses that wrap the <rt> element that contains the annotation's text. */
-export type SkruvReactRpHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvRpHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <ruby> HTML element represents small annotations that are rendered above, below, or next to base text, usually used for showing the pronunciation of East Asian characters. It can also be used for annotating other kinds of text, but this usage is less common. */
-export type SkruvReactRubyHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvRubyHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <rt> HTML element specifies the ruby text component of a ruby annotation, which is used to provide pronunciation, translation, or transliteration information for East Asian typography. The <rt> element must always be contained within a <ruby> element. */
-export type SkruvReactRtHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvRtHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <s> HTML element renders text with a strikethrough, or a line through it. Use the <s> element to represent things that are no longer relevant or no longer accurate. However, <s> is not appropriate when indicating document edits; for that, use the <del> and <ins> elements, as appropriate. */
-export type SkruvReactSHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvSHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <samp> HTML element is used to enclose inline text which represents sample (or quoted) output from a computer program. Its contents are typically rendered using the browser's default monospaced font (such as Courier or Lucida Console). */
-export type SkruvReactSampHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvSampHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <small> HTML element represents side-comments and small print, like copyright and legal text, independent of its styled presentation. By default, it renders text within it one font-size smaller, such as from small to x-small. */
-export type SkruvReactSmallHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvSmallHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <span> HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. <span> is very much like a <div> element, but <div> is a block-level element whereas a <span> is an inline-level element. */
-export type SkruvReactSpanHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLSpanElement, {}>>
-
+export type ReactSkruvSpanHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLSpanElement, {}>>
 
 /** The <strong> HTML element indicates that its contents have strong importance, seriousness, or urgency. Browsers typically render the contents in bold type. */
-export type SkruvReactStrongHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvStrongHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <sub> HTML element specifies inline text which should be displayed as subscript for solely typographical reasons. Subscripts are typically rendered with a lowered baseline using smaller text. */
-export type SkruvReactSubHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvSubHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <sup> HTML element specifies inline text which is to be displayed as superscript for solely typographical reasons. Superscripts are usually rendered with a raised baseline using smaller text. */
-export type SkruvReactSupHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvSupHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <time> HTML element represents a specific period in time. It may include the datetime attribute to translate dates into machine-readable format, allowing for better search engine results or custom features such as reminders. */
-export type SkruvReactTimeHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTimeElement, {
+export type ReactSkruvTimeHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTimeElement, {
   /**
    * This attribute indicates the time and/or date of the element and must be in one of the formats described below.
    */
   'dateTime'?: string | false
 }>>
 
-
 /** The <u> HTML element represents a span of inline text which should be rendered in a way that indicates that it has a non-textual annotation. This is rendered by default as a simple solid underline, but may be altered using CSS. */
-export type SkruvReactUHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvUHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <var> HTML element represents the name of a variable in a mathematical expression or a programming context. It's typically presented using an italicized version of the current typeface, although that behavior is browser-dependent. */
-export type SkruvReactVarHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvVarHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <wbr> HTML element represents a word break opportunity—a position within text where the browser may optionally break a line, though its line-breaking rules would not otherwise create a break at that location. */
-export type SkruvReactWbrHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvWbrHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <area> HTML element defines an area inside an image map that has predefined clickable areas. An image map allows geometric areas on an image to be associated with hypertext links. */
-export type SkruvReactAreaHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLAreaElement, {
+export type ReactSkruvAreaHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLAreaElement, {
   /**
    * A text string alternative to display on browsers that do not display images.
    * 
@@ -1212,9 +1133,8 @@ export type SkruvReactAreaHTMLAttributes = util.AsyncContent<ReactHTMLAttributes
   'target'?: string | false
 }>>
 
-
 /** The <audio> HTML element is used to embed sound content in documents. It may contain one or more audio sources, represented using the src attribute or the <source> element: the browser will choose the most suitable one. It can also be the destination for streamed media, using a MediaStream. */
-export type SkruvReactAudioHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLAudioElement, {
+export type ReactSkruvAudioHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLAudioElement, {
   /**
    * A Boolean attribute: if specified, the audio will automatically begin playback as soon as it can do so, without waiting for the entire audio file to finish downloading.
    * 
@@ -1285,9 +1205,8 @@ export type SkruvReactAudioHTMLAttributes = util.AsyncContent<ReactHTMLAttribute
   'src'?: string | false
 }>>
 
-
 /** The <img> HTML element embeds an image into the document. */
-export type SkruvReactImgHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLImageElement, {
+export type ReactSkruvImgHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLImageElement, {
   /**
    * Defines an alternative text description of the image.
    * 
@@ -1456,18 +1375,16 @@ export type SkruvReactImgHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<
   'useMap'?: string | false
 }>>
 
-
 /** The <map> HTML element is used with <area> elements to define an image map (a clickable link area). */
-export type SkruvReactMapHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLMapElement, {
+export type ReactSkruvMapHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLMapElement, {
   /**
    * The name attribute gives the map a name so that it can be referenced. The attribute must be present and must have a non-empty value with no space characters. The value of the name attribute must not be equal to the value of the name attribute of another <map> element in the same document. If the id attribute is also specified, both attributes must have the same value.
    */
   'name'?: string | false
 }>>
 
-
 /** The <track> HTML element is used as a child of the media elements, <audio> and <video>. It lets you specify timed text tracks (or time-based data), for example to automatically handle subtitles. The tracks are formatted in WebVTT format (.vtt files) — Web Video Text Tracks. */
-export type SkruvReactTrackHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTrackElement, {
+export type ReactSkruvTrackHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTrackElement, {
   /**
    * This attribute indicates that the track should be enabled unless the user's preferences indicate that another track is more appropriate. This may only be used on one track element per media element.
    */
@@ -1518,9 +1435,8 @@ export type SkruvReactTrackHTMLAttributes = util.AsyncContent<ReactHTMLAttribute
   'srcLang'?: string | false
 }>>
 
-
 /** The <video> HTML element embeds a media player which supports video playback into the document. You can use <video> for audio content as well, but the <audio> element may provide a more appropriate user experience. */
-export type SkruvReactVideoHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLVideoElement, {
+export type ReactSkruvVideoHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLVideoElement, {
   /**
    * A Boolean attribute; if specified, the video automatically begins to play back as soon as it can do so without stopping to finish loading the data.
    * 
@@ -1617,9 +1533,8 @@ export type SkruvReactVideoHTMLAttributes = util.AsyncContent<ReactHTMLAttribute
   'width'?: number | string | false
 }>>
 
-
 /** The <embed> HTML element embeds external content at the specified point in the document. This content is provided by an external application or other source of interactive content such as a browser plug-in. */
-export type SkruvReactEmbedHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLEmbedElement, {
+export type ReactSkruvEmbedHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLEmbedElement, {
   /**
    * The displayed height of the resource, in CSS pixels. This must be an absolute value; percentages are not allowed.
    */
@@ -1638,9 +1553,8 @@ export type SkruvReactEmbedHTMLAttributes = util.AsyncContent<ReactHTMLAttribute
   'width'?: number | string | false
 }>>
 
-
 /** The <iframe> HTML element represents a nested browsing context, embedding another HTML page into the current one. */
-export type SkruvReactIframeHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLIFrameElement, {
+export type ReactSkruvIframeHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLIFrameElement, {
   /**
    * Specifies a Permissions Policy for the <iframe>. The policy defines what features are available to the <iframe> (for example, access to the microphone, camera, battery, web-share, etc.) based on the origin of the request.
    * 
@@ -1753,9 +1667,8 @@ export type SkruvReactIframeHTMLAttributes = util.AsyncContent<ReactHTMLAttribut
   'width'?: number | string | false
 }>>
 
-
 /** The <object> HTML element represents an external resource, which can be treated as an image, a nested browsing context, or a resource to be handled by a plugin. */
-export type SkruvReactObjectHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLObjectElement, {
+export type ReactSkruvObjectHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLObjectElement, {
   /**
    * A space-separated list of URIs for archives of resources for the object.
    */
@@ -1814,13 +1727,11 @@ export type SkruvReactObjectHTMLAttributes = util.AsyncContent<ReactHTMLAttribut
   'width'?: number | string | false
 }>>
 
-
 /** The <picture> HTML element contains zero or more <source> elements and one <img> element to offer alternative versions of an image for different display/device scenarios. */
-export type SkruvReactPictureHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLPictureElement, {}>>
-
+export type ReactSkruvPictureHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLPictureElement, {}>>
 
 /** The <source> HTML element specifies multiple media resources for the <picture>, the <audio> element, or the <video> element. It is a void element, meaning that it has no content and does not have a closing tag. It is commonly used to offer the same media content in multiple file formats in order to provide compatibility with a broad range of browsers given their differing support for image file formats and media file formats. */
-export type SkruvReactSourceHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLSourceElement, {
+export type ReactSkruvSourceHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLSourceElement, {
   /**
    * The MIME media type of the image or other media type, optionally with a codecs parameter.
    */
@@ -1871,9 +1782,8 @@ export type SkruvReactSourceHTMLAttributes = util.AsyncContent<ReactHTMLAttribut
   'width'?: number | string | false
 }>>
 
-
 /** Experimental: This is an experimental technologyCheck the Browser compatibility table carefully before using this in production. */
-export type SkruvReactPortalHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLUnknownElement, {
+export type ReactSkruvPortalHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLUnknownElement, {
   /**
    * Sets the referrer policy to use when requesting the page at the URL given as the value of the src attribute.
    */
@@ -1884,9 +1794,8 @@ export type SkruvReactPortalHTMLAttributes = util.AsyncContent<ReactHTMLAttribut
   'src'?: string | false
 }>>
 
-
 /** Use the HTML <canvas> element with either the canvas scripting API or the WebGL API to draw graphics and animations. */
-export type SkruvReactCanvasHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLCanvasElement, {
+export type ReactSkruvCanvasHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLCanvasElement, {
   /**
    * The height of the coordinate space in CSS pixels. Defaults to 150.
    */
@@ -1897,13 +1806,11 @@ export type SkruvReactCanvasHTMLAttributes = util.AsyncContent<ReactHTMLAttribut
   'width'?: number | string | false
 }>>
 
-
 /** The <noscript> HTML element defines a section of HTML to be inserted if a script type on the page is unsupported or if scripting is currently turned off in the browser. */
-export type SkruvReactNoscriptHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvNoscriptHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <del> HTML element represents a range of text that has been deleted from a document. This can be used when rendering "track changes" or source code diff information, for example. The <ins> element can be used for the opposite purpose: to indicate text that has been added to the document. */
-export type SkruvReactDelHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLModElement, {
+export type ReactSkruvDelHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLModElement, {
   /**
    * A URI for a resource that explains the change (for example, meeting minutes).
    */
@@ -1914,9 +1821,8 @@ export type SkruvReactDelHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<
   'dateTime'?: string | false
 }>>
 
-
 /** The <ins> HTML element represents a range of text that has been added to a document. You can use the <del> element to similarly represent a range of text that has been deleted from the document. */
-export type SkruvReactInsHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLModElement, {
+export type ReactSkruvInsHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLModElement, {
   /**
    * This attribute defines the URI of a resource that explains the change, such as a link to meeting minutes or a ticket in a troubleshooting system.
    */
@@ -1927,22 +1833,19 @@ export type SkruvReactInsHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<
   'dateTime'?: string | false
 }>>
 
-
 /** The <caption> HTML element specifies the caption (or title) of a table. */
-export type SkruvReactCaptionHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableCaptionElement, {}>>
-
+export type ReactSkruvCaptionHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableCaptionElement, {}>>
 
 /** The <col> HTML element defines a column within a table and is used for defining common semantics on all common cells. It is generally found within a <colgroup> element. */
-export type SkruvReactColHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableColElement, {
+export type ReactSkruvColHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableColElement, {
   /**
    * This attribute contains a positive integer indicating the number of consecutive columns the <col> element spans. If not present, its default value is 1.
    */
   'span'?: number | false
 }>>
 
-
 /** The <colgroup> HTML element defines a group of columns within a table. */
-export type SkruvReactColgroupHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableColElement, {
+export type ReactSkruvColgroupHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableColElement, {
   /**
    * This attribute contains a positive integer indicating the number of consecutive columns the <colgroup> element spans. If not present, its default value is 1.
    * 
@@ -1951,21 +1854,17 @@ export type SkruvReactColgroupHTMLAttributes = util.AsyncContent<ReactHTMLAttrib
   'span'?: number | false
 }>>
 
-
 /** The <table> HTML element represents tabular data — that is, information presented in a two-dimensional table comprised of rows and columns of cells containing data. */
-export type SkruvReactTableHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableElement, {}>>
-
+export type ReactSkruvTableHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableElement, {}>>
 
 /** The <tbody> HTML element encapsulates a set of table rows (<tr> elements), indicating that they comprise the body of the table (<table>). */
-export type SkruvReactTbodyHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableSectionElement, {}>>
-
+export type ReactSkruvTbodyHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableSectionElement, {}>>
 
 /** The <tr> HTML element defines a row of cells in a table. The row's cells can then be established using a mix of <td> (data cell) and <th> (header cell) elements. */
-export type SkruvReactTrHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableRowElement, {}>>
-
+export type ReactSkruvTrHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableRowElement, {}>>
 
 /** The <td> HTML element defines a cell of a table that contains data. It participates in the table model. */
-export type SkruvReactTdHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableCellElement, {
+export type ReactSkruvTdHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableCellElement, {
   /**
    * This attribute contains a non-negative integer value that indicates for how many columns the cell extends. Its default value is 1. Values higher than 1000 will be considered as incorrect and will be set to the default value (1).
    */
@@ -1980,13 +1879,11 @@ export type SkruvReactTdHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<H
   'rowSpan'?: number | false
 }>>
 
-
 /** The <tfoot> HTML element defines a set of rows summarizing the columns of the table. */
-export type SkruvReactTfootHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableSectionElement, {}>>
-
+export type ReactSkruvTfootHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableSectionElement, {}>>
 
 /** The <th> HTML element defines a cell as the header of a group of table cells. The exact nature of this group is defined by the scope and headers attributes. */
-export type SkruvReactThHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableCellElement, {
+export type ReactSkruvThHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableCellElement, {
   /**
    * This attribute contains a short abbreviated description of the cell's content. Some user-agents, such as speech readers, may present this description before the content itself.
    */
@@ -2019,13 +1916,11 @@ export type SkruvReactThHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<H
   'scope'?: string | false
 }>>
 
-
 /** The <thead> HTML element defines a set of rows defining the head of the columns of the table. */
-export type SkruvReactTheadHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableSectionElement, {}>>
-
+export type ReactSkruvTheadHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTableSectionElement, {}>>
 
 /** The <button> HTML element is an interactive element activated by a user with a mouse, keyboard, finger, voice command, or other assistive technology. Once activated, it then performs an action, such as submitting a form or opening a dialog. */
-export type SkruvReactButtonHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLButtonElement, {
+export type ReactSkruvButtonHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLButtonElement, {
   /**
    * This Boolean attribute specifies that the button should have input focus when the page loads. Only one element in a document can have this attribute.
    */
@@ -2132,13 +2027,11 @@ export type SkruvReactButtonHTMLAttributes = util.AsyncContent<ReactHTMLAttribut
   'value'?: number | string | false
 }>>
 
-
 /** The <datalist> HTML element contains a set of <option> elements that represent the permissible or recommended options available to choose from within other controls. */
-export type SkruvReactDatalistHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLDataListElement, {}>>
-
+export type ReactSkruvDatalistHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLDataListElement, {}>>
 
 /** The <option> HTML element is used to define an item contained in a <select>, an <optgroup>, or a <datalist> element. As such, <option> can represent menu items in popups and other lists of items in an HTML document. */
-export type SkruvReactOptionHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLOptionElement, {
+export type ReactSkruvOptionHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLOptionElement, {
   /**
    * If this Boolean attribute is set, this option is not checkable. Often browsers grey out such control and it won't receive any browsing event, like mouse clicks or focus-related ones. If this attribute is not set, the element can still be disabled if one of its ancestors is a disabled <optgroup> element.
    */
@@ -2157,9 +2050,8 @@ export type SkruvReactOptionHTMLAttributes = util.AsyncContent<ReactHTMLAttribut
   'value'?: number | string | false
 }>>
 
-
 /** The <fieldset> HTML element is used to group several controls as well as labels (<label>) within a web form. */
-export type SkruvReactFieldsetHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLFieldSetElement, {
+export type ReactSkruvFieldsetHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLFieldSetElement, {
   /**
    * If this Boolean attribute is set, all form controls that are descendants of the <fieldset>, are disabled, meaning they are not editable and won't be submitted along with the <form>. They won't receive any browsing events, like mouse clicks or focus-related events. By default browsers display such controls grayed out. Note that form elements inside the <legend> element won't be disabled.
    */
@@ -2176,9 +2068,8 @@ export type SkruvReactFieldsetHTMLAttributes = util.AsyncContent<ReactHTMLAttrib
   'name'?: string | false
 }>>
 
-
 /** The <label> HTML element represents a caption for an item in a user interface. */
-export type SkruvReactLabelHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLLabelElement, {
+export type ReactSkruvLabelHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLLabelElement, {
   /**
    * The value of the for attribute must be a single id for a labelable form-related element in the same document as the <label> element. So, any given label element can be associated with only one form control.
    * 
@@ -2193,9 +2084,8 @@ export type SkruvReactLabelHTMLAttributes = util.AsyncContent<ReactHTMLAttribute
   'htmlfor'?: string | false
 }>>
 
-
 /** The <form> HTML element represents a document section containing interactive controls for submitting information. */
-export type SkruvReactFormHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLFormElement, {
+export type ReactSkruvFormHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLFormElement, {
   /**
    * Space-separated character encodings the server accepts. The browser uses them in the order in which they are listed. The default value means the same encoding as the page.
    * 
@@ -2232,9 +2122,8 @@ export type SkruvReactFormHTMLAttributes = util.AsyncContent<ReactHTMLAttributes
   'rel'?: string | false
 }>>
 
-
 /** The <input> HTML element is used to create interactive controls for web-based forms in order to accept data from the user; a wide variety of types of input data and control widgets are available, depending on the device and user agent. The <input> element is one of the most powerful and complex in all of HTML due to the sheer number of combinations of input types and attributes. */
-export type SkruvReactInputHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLInputElement, {
+export type ReactSkruvInputHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLInputElement, {
   /**
    * Hint for expected file type in file upload controls
    */
@@ -2369,13 +2258,11 @@ export type SkruvReactInputHTMLAttributes = util.AsyncContent<ReactHTMLAttribute
   'width'?: number | string | false
 }>>
 
-
 /** The <legend> HTML element represents a caption for the content of its parent <fieldset>. */
-export type SkruvReactLegendHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLLegendElement, {}>>
-
+export type ReactSkruvLegendHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLLegendElement, {}>>
 
 /** The <meter> HTML element represents either a scalar value within a known range or a fractional value. */
-export type SkruvReactMeterHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLMeterElement, {
+export type ReactSkruvMeterHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLMeterElement, {
   /**
    * The current numeric value. This must be between the minimum and maximum values (min attribute and max attribute) if they are specified. If unspecified or malformed, the value is 0. If specified, but not within the range given by the min attribute and max attribute, the value is equal to the nearest end of the range.
    * 
@@ -2408,9 +2295,8 @@ export type SkruvReactMeterHTMLAttributes = util.AsyncContent<ReactHTMLAttribute
   'form'?: string | false
 }>>
 
-
 /** The <optgroup> HTML element creates a grouping of options within a <select> element. */
-export type SkruvReactOptgroupHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLOptGroupElement, {
+export type ReactSkruvOptgroupHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLOptGroupElement, {
   /**
    * If this Boolean attribute is set, none of the items in this option group is selectable. Often browsers grey out such control and it won't receive any browsing events, like mouse clicks or focus-related ones.
    */
@@ -2421,9 +2307,8 @@ export type SkruvReactOptgroupHTMLAttributes = util.AsyncContent<ReactHTMLAttrib
   'label'?: string | false
 }>>
 
-
 /** The <select> HTML element represents a control that provides a menu of options. */
-export type SkruvReactSelectHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLSelectElement, {
+export type ReactSkruvSelectHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLSelectElement, {
   /**
    * A string providing a hint for a user agent's autocomplete feature. See The HTML autocomplete attribute for a complete list of values and details on how to use autocomplete.
    */
@@ -2462,9 +2347,8 @@ export type SkruvReactSelectHTMLAttributes = util.AsyncContent<ReactHTMLAttribut
   'size'?: string | false
 }>>
 
-
 /** The <output> HTML element is a container element into which a site or app can inject the results of a calculation or the outcome of a user action. */
-export type SkruvReactOutputHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLOutputElement, {
+export type ReactSkruvOutputHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLOutputElement, {
   /**
    * A space-separated list of other elements' ids, indicating that those elements contributed input values to (or otherwise affected) the calculation.
    */
@@ -2481,9 +2365,8 @@ export type SkruvReactOutputHTMLAttributes = util.AsyncContent<ReactHTMLAttribut
   'name'?: string | false
 }>>
 
-
 /** The <progress> HTML element displays an indicator showing the completion progress of a task, typically displayed as a progress bar. */
-export type SkruvReactProgressHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLProgressElement, {
+export type ReactSkruvProgressHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLProgressElement, {
   /**
    * This attribute describes how much work the task indicated by the progress element requires. The max attribute, if present, must have a value greater than 0 and be a valid floating point number. The default value is 1.
    */
@@ -2494,9 +2377,8 @@ export type SkruvReactProgressHTMLAttributes = util.AsyncContent<ReactHTMLAttrib
   'value'?: number | string | false
 }>>
 
-
 /** The <textarea> HTML element represents a multi-line plain-text editing control, useful when you want to allow users to enter a sizeable amount of free-form text, for example a comment on a review or feedback form. */
-export type SkruvReactTextareaHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTextAreaElement, {
+export type ReactSkruvTextareaHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTextAreaElement, {
   /**
    * This attribute indicates whether the value of the control can be automatically completed by the browser. Possible values are:
    * 
@@ -2599,9 +2481,8 @@ export type SkruvReactTextareaHTMLAttributes = util.AsyncContent<ReactHTMLAttrib
   'wrap'?: string | false
 }>>
 
-
 /** The <details> HTML element creates a disclosure widget in which information is visible only when the widget is toggled into an "open" state. A summary or label must be provided using the <summary> element. */
-export type SkruvReactDetailsHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLDetailsElement, {
+export type ReactSkruvDetailsHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLDetailsElement, {
   /**
    * This Boolean attribute indicates whether the details — that is, the contents of the <details> element — are currently visible. The details are shown when this attribute exists, or hidden when this attribute is absent. By default this attribute is absent which means the details are not visible.
    * 
@@ -2610,13 +2491,11 @@ export type SkruvReactDetailsHTMLAttributes = util.AsyncContent<ReactHTMLAttribu
   'open'?: boolean | false
 }>>
 
-
 /** The <summary> HTML element specifies a summary, caption, or legend for a <details> element's disclosure box. Clicking the <summary> element toggles the state of the parent <details> element open and closed. */
-export type SkruvReactSummaryHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
-
+export type ReactSkruvSummaryHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLElement, {}>>
 
 /** The <dialog> HTML element represents a dialog box or other interactive component, such as a dismissible alert, inspector, or subwindow. */
-export type SkruvReactDialogHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLDialogElement, {
+export type ReactSkruvDialogHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLDialogElement, {
   /**
    * Indicates that the dialog is active and can be interacted with. When the open attribute is not set, the dialog shouldn't be shown to the user.
    * 
@@ -2625,9 +2504,8 @@ export type SkruvReactDialogHTMLAttributes = util.AsyncContent<ReactHTMLAttribut
   'open'?: boolean | false
 }>>
 
-
 /** The <slot> HTML element—part of the Web Components technology suite—is a placeholder inside a web component that you can fill with your own markup, which lets you create separate DOM trees and present them together. */
-export type SkruvReactSlotHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLSlotElement, {
+export type ReactSkruvSlotHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLSlotElement, {
   /**
    * The slot's name.
    * 
@@ -2636,12 +2514,11 @@ export type SkruvReactSlotHTMLAttributes = util.AsyncContent<ReactHTMLAttributes
   'name'?: string | false
 }>>
 
-
 /** The <template> HTML element is a mechanism for holding HTML that is not to be rendered immediately when a page is loaded but may be instantiated subsequently during runtime using JavaScript. */
-export type SkruvReactTemplateHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTemplateElement, {}>>
+export type ReactSkruvTemplateHTMLAttributes = util.AsyncContent<ReactHTMLAttributes<HTMLTemplateElement, {}>>
 
 /** The <a> SVG element creates a hyperlink to other web pages, files, locations in the same page, email addresses, or any other URL. It is very similar to HTML's <a> element. */
-export type SkruvReactASVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGAElement, {
+export type ReactSkruvASVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGAElement, {
   /**
    * Instructs browsers to download a URL instead of navigating to it, so the user will be prompted to save it as a local file.
    * 
@@ -2692,14 +2569,12 @@ export type SkruvReactASVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGA
   'type'?: string | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The SVG <animate> element provides a way to animate an attribute of an element over time. */
-export type SkruvReactAnimateSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGAnimateElement, {
+export type ReactSkruvAnimateSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGAnimateElement, {
 } & ReactSVGAnimationAttributes>>
 
-
 /** The SVG <animateMotion> element provides a way to define how an element moves along a motion path. */
-export type SkruvReactAnimatemotionSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGAnimateMotionElement, {
+export type ReactSkruvAnimatemotionSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGAnimateMotionElement, {
   /**
    * This attribute indicate, in the range [0,1], how far is the object along the path for each keyTimes associated values.
    * 
@@ -2720,14 +2595,12 @@ export type SkruvReactAnimatemotionSVGAttributes = util.AsyncContent<ReactSVGAtt
   'rotate'?: string | number | boolean | false
 } & ReactSVGAnimationAttributes>>
 
-
 /** The animateTransform element animates a transformation attribute on its target element, thereby allowing animations to control translation, scaling, rotation, and/or skewing. */
-export type SkruvReactAnimatetransformSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGAnimateTransformElement, {
+export type ReactSkruvAnimatetransformSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGAnimateTransformElement, {
 } & ReactSVGAnimationAttributes>>
 
-
 /** The <circle> SVG element is an SVG basic shape, used to draw circles based on a center point and a radius. */
-export type SkruvReactCircleSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGCircleElement, {
+export type ReactSkruvCircleSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGCircleElement, {
   /**
    * The x-axis coordinate of the center of the circle.
    * 
@@ -2754,9 +2627,8 @@ export type SkruvReactCircleSVGAttributes = util.AsyncContent<ReactSVGAttributes
   'pathLength'?: string | number | boolean | false
 } & ReactSVGAnimationAttributes>>
 
-
 /** The <clipPath> SVG element defines a clipping path, to be used by the clip-path property. */
-export type SkruvReactClippathSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGClipPathElement, {
+export type ReactSkruvClippathSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGClipPathElement, {
   /**
    * Defines the coordinate system for the contents of the <clipPath> element.
    * 
@@ -2765,18 +2637,15 @@ export type SkruvReactClippathSVGAttributes = util.AsyncContent<ReactSVGAttribut
   'clipPathUnits'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <defs> element is used to store graphical objects that will be used at a later time. Objects created inside a <defs> element are not rendered directly. To display them you have to reference them (with a <use> element for example). */
-export type SkruvReactDefsSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGDefsElement, {
+export type ReactSkruvDefsSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGDefsElement, {
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <desc> element provides an accessible, long-text description of any SVG container element or graphics element. */
-export type SkruvReactDescSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGDescElement, {}>>
-
+export type ReactSkruvDescSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGDescElement, {}>>
 
 /** The <ellipse> element is an SVG basic shape, used to create ellipses based on a center coordinate, and both their x and y radius. */
-export type SkruvReactEllipseSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGEllipseElement, {
+export type ReactSkruvEllipseSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGEllipseElement, {
   /**
    * The x position of the center of the ellipse.
    * 
@@ -2809,31 +2678,27 @@ export type SkruvReactEllipseSVGAttributes = util.AsyncContent<ReactSVGAttribute
   'pathLength'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <feBlend> SVG filter primitive composes two objects together ruled by a certain blending mode. This is similar to what is known from image editing software when blending two layers. The mode is defined by the mode attribute. */
-export type SkruvReactFeblendSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEBlendElement, {
+export type ReactSkruvFeblendSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEBlendElement, {
   'in'?: string | number | boolean | false
   'in2'?: string | number | boolean | false
   'mode'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feColorMatrix> SVG filter element changes colors based on a transformation matrix. Every pixel's color value [R,G,B,A] is matrix multiplied by a 5 by 5 color matrix to create new color [R',G',B',A']. */
-export type SkruvReactFecolormatrixSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEColorMatrixElement, {
+export type ReactSkruvFecolormatrixSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEColorMatrixElement, {
   'in'?: string | number | boolean | false
   'type'?: string | false
   'values'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feComponentTransfer> SVG filter primitive performs color-component-wise remapping of data for each pixel. It allows operations like brightness adjustment, contrast adjustment, color balance or thresholding. */
-export type SkruvReactFecomponenttransferSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEComponentTransferElement, {
+export type ReactSkruvFecomponenttransferSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEComponentTransferElement, {
   'in'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feComposite> SVG filter primitive performs the combination of two input images pixel-wise in image space using one of the Porter-Duff compositing operations: over, in, atop, out, xor, lighter, or arithmetic. */
-export type SkruvReactFecompositeSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFECompositeElement, {
+export type ReactSkruvFecompositeSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFECompositeElement, {
   'in'?: string | number | boolean | false
   'in2'?: string | number | boolean | false
   'operator'?: string | number | boolean | false
@@ -2843,9 +2708,8 @@ export type SkruvReactFecompositeSVGAttributes = util.AsyncContent<ReactSVGAttri
   'k4'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feConvolveMatrix> SVG filter primitive applies a matrix convolution filter effect. A convolution combines pixels in the input image with neighboring pixels to produce a resulting image. A wide variety of imaging operations can be achieved through convolutions, including blurring, edge detection, sharpening, embossing and beveling. */
-export type SkruvReactFeconvolvematrixSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEConvolveMatrixElement, {
+export type ReactSkruvFeconvolvematrixSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEConvolveMatrixElement, {
   'in'?: string | number | boolean | false
   'order'?: string | number | boolean | false
   'kernelMatrix'?: string | number | boolean | false
@@ -2858,18 +2722,16 @@ export type SkruvReactFeconvolvematrixSVGAttributes = util.AsyncContent<ReactSVG
   'preserveAlpha'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feDiffuseLighting> SVG filter primitive lights an image using the alpha channel as a bump map. The resulting image, which is an RGBA opaque image, depends on the light color, light position and surface geometry of the input bump map. */
-export type SkruvReactFediffuselightingSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEDiffuseLightingElement, {
+export type ReactSkruvFediffuselightingSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEDiffuseLightingElement, {
   'in'?: string | number | boolean | false
   'surfaceScale'?: string | number | boolean | false
   'diffuseConstant'?: string | number | boolean | false
   'kernelUnitLength'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feDisplacementMap> SVG filter primitive uses the pixel values from the image from in2 to spatially displace the image from in. */
-export type SkruvReactFedisplacementmapSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEDisplacementMapElement, {
+export type ReactSkruvFedisplacementmapSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEDisplacementMapElement, {
   'in'?: string | number | boolean | false
   'in2'?: string | number | boolean | false
   'scale'?: string | number | boolean | false
@@ -2877,16 +2739,14 @@ export type SkruvReactFedisplacementmapSVGAttributes = util.AsyncContent<ReactSV
   'yChannelSelector'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feDistantLight> filter primitive defines a distant light source that can be used within a lighting filter primitive: <feDiffuseLighting> or <feSpecularLighting>. */
-export type SkruvReactFedistantlightSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEDistantLightElement, {
+export type ReactSkruvFedistantlightSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEDistantLightElement, {
   'azimuth'?: string | number | boolean | false
   'elevation'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The SVG <feDropShadow> filter primitive creates a drop shadow of the input image. It can only be used inside a <filter> element. */
-export type SkruvReactFedropshadowSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEDropShadowElement, {
+export type ReactSkruvFedropshadowSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEDropShadowElement, {
   /**
    * This attribute defines the x offset of the drop shadow.
    * 
@@ -2907,86 +2767,73 @@ export type SkruvReactFedropshadowSVGAttributes = util.AsyncContent<ReactSVGAttr
   'stdDeviation'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feFlood> SVG filter primitive fills the filter subregion with the color and opacity defined by flood-color and flood-opacity. */
-export type SkruvReactFefloodSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEFloodElement, {
+export type ReactSkruvFefloodSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEFloodElement, {
   'floodcolor'?: string | number | boolean | false
   'floodopacity'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feFuncA> SVG filter primitive defines the transfer function for the alpha component of the input graphic of its parent <feComponentTransfer> element. */
-export type SkruvReactFefuncaSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEFuncAElement, {
+export type ReactSkruvFefuncaSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEFuncAElement, {
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
-
 
 /** The <feFuncB> SVG filter primitive defines the transfer function for the blue component of the input graphic of its parent <feComponentTransfer> element. */
-export type SkruvReactFefuncbSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEFuncBElement, {
+export type ReactSkruvFefuncbSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEFuncBElement, {
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
-
 
 /** The <feFuncG> SVG filter primitive defines the transfer function for the green component of the input graphic of its parent <feComponentTransfer> element. */
-export type SkruvReactFefuncgSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEFuncGElement, {
+export type ReactSkruvFefuncgSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEFuncGElement, {
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
-
 
 /** The <feFuncR> SVG filter primitive defines the transfer function for the red component of the input graphic of its parent <feComponentTransfer> element. */
-export type SkruvReactFefuncrSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEFuncRElement, {
+export type ReactSkruvFefuncrSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEFuncRElement, {
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feGaussianBlur> SVG filter primitive blurs the input image by the amount specified in stdDeviation, which defines the bell-curve. */
-export type SkruvReactFegaussianblurSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEGaussianBlurElement, {
+export type ReactSkruvFegaussianblurSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEGaussianBlurElement, {
   'in'?: string | number | boolean | false
   'stdDeviation'?: string | number | boolean | false
   'edgeMode'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feImage> SVG filter primitive fetches image data from an external source and provides the pixel data as output (meaning if the external source is an SVG image, it is rasterized.) */
-export type SkruvReactFeimageSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEImageElement, {
+export type ReactSkruvFeimageSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEImageElement, {
   'crossOrigin'?: string | false
   'preserveAspectRatio'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feMerge> SVG element allows filter effects to be applied concurrently instead of sequentially. This is achieved by other filters storing their output via the result attribute and then accessing it in a <feMergeNode> child. */
-export type SkruvReactFemergeSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEMergeElement, {
+export type ReactSkruvFemergeSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEMergeElement, {
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The feMergeNode takes the result of another filter to be processed by its parent <feMerge>. */
-export type SkruvReactFemergenodeSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEMergeNodeElement, {
+export type ReactSkruvFemergenodeSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEMergeNodeElement, {
   'in'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feMorphology> SVG filter primitive is used to erode or dilate the input image. Its usefulness lies especially in fattening or thinning effects. */
-export type SkruvReactFemorphologySVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEMorphologyElement, {
+export type ReactSkruvFemorphologySVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEMorphologyElement, {
   'in'?: string | number | boolean | false
   'operator'?: string | number | boolean | false
   'radius'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feOffset> SVG filter primitive allows to offset the input image. The input image as a whole is offset by the values specified in the dx and dy attributes. */
-export type SkruvReactFeoffsetSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEOffsetElement, {
+export type ReactSkruvFeoffsetSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEOffsetElement, {
   'in'?: string | number | boolean | false
   'dx'?: string | number | boolean | false
   'dy'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <fePointLight> filter primitive defines a light source which allows to create a point light effect. It that can be used within a lighting filter primitive: <feDiffuseLighting> or <feSpecularLighting>. */
-export type SkruvReactFepointlightSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEPointLightElement, {
+export type ReactSkruvFepointlightSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFEPointLightElement, {
   'x'?: string | number | boolean | false
   'y'?: string | number | boolean | false
   'z'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feSpecularLighting> SVG filter primitive lights a source graphic using the alpha channel as a bump map. The resulting image is an RGBA image based on the light color. The lighting calculation follows the standard specular component of the Phong lighting model. The resulting image depends on the light color, light position and surface geometry of the input bump map. The result of the lighting calculation is added. The filter primitive assumes that the viewer is at infinity in the z direction. */
-export type SkruvReactFespecularlightingSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFESpecularLightingElement, {
+export type ReactSkruvFespecularlightingSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFESpecularLightingElement, {
   'in'?: string | number | boolean | false
   'surfaceScale'?: string | number | boolean | false
   'specularConstant'?: string | number | boolean | false
@@ -2994,11 +2841,10 @@ export type SkruvReactFespecularlightingSVGAttributes = util.AsyncContent<ReactS
   'kernelUnitLength'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feSpotLight> SVG filter primitive defines a light source that can be used to create a spotlight effect.
  * 
  * It is used within a lighting filter primitive: <feDiffuseLighting> or <feSpecularLighting>. */
-export type SkruvReactFespotlightSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFESpotLightElement, {
+export type ReactSkruvFespotlightSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFESpotLightElement, {
   'x'?: string | number | boolean | false
   'y'?: string | number | boolean | false
   'z'?: string | number | boolean | false
@@ -3009,15 +2855,13 @@ export type SkruvReactFespotlightSVGAttributes = util.AsyncContent<ReactSVGAttri
   'limitingConeAngle'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feTile> SVG filter primitive allows to fill a target rectangle with a repeated, tiled pattern of an input image. The effect is similar to the one of a <pattern>. */
-export type SkruvReactFetileSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFETileElement, {
+export type ReactSkruvFetileSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFETileElement, {
   'in'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <feTurbulence> SVG filter primitive creates an image using the Perlin turbulence function. It allows the synthesis of artificial textures like clouds or marble. The resulting image will fill the entire filter primitive subregion. */
-export type SkruvReactFeturbulenceSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFETurbulenceElement, {
+export type ReactSkruvFeturbulenceSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFETurbulenceElement, {
   'baseFrequency'?: string | number | boolean | false
   'numOctaves'?: string | number | boolean | false
   'seed'?: string | number | boolean | false
@@ -3025,9 +2869,8 @@ export type SkruvReactFeturbulenceSVGAttributes = util.AsyncContent<ReactSVGAttr
   'type'?: string | false
 } & ReactSVGPresentationAttributes & ReactSVGFilterAttributes>>
 
-
 /** The <filter> SVG element defines a custom filter effect by grouping atomic filter primitives. It is never rendered itself, but must be used by the filter attribute on SVG elements, or the filter CSS property for SVG/HTML elements. */
-export type SkruvReactFilterSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFilterElement, {
+export type ReactSkruvFilterSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGFilterElement, {
   'x'?: string | number | boolean | false
   'y'?: string | number | boolean | false
   'width'?: number | string | false
@@ -3036,9 +2879,8 @@ export type SkruvReactFilterSVGAttributes = util.AsyncContent<ReactSVGAttributes
   'primitiveUnits'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <foreignObject> SVG element includes elements from a different XML namespace. In the context of a browser, it is most likely (X)HTML. */
-export type SkruvReactForeignobjectSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGForeignObjectElement, {
+export type ReactSkruvForeignobjectSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGForeignObjectElement, {
   /**
    * The height of the foreignObject.
    * 
@@ -3065,19 +2907,16 @@ export type SkruvReactForeignobjectSVGAttributes = util.AsyncContent<ReactSVGAtt
   'y'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <g> SVG element is a container used to group other SVG elements. */
-export type SkruvReactGSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGGElement, {
+export type ReactSkruvGSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGGElement, {
 } & ReactSVGPresentationAttributes>>
-
 
 /** The <image> SVG element includes images inside SVG documents. It can display raster image files or other SVG files. */
-export type SkruvReactImageSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGImageElement, {
+export type ReactSkruvImageSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGImageElement, {
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <line> element is an SVG basic shape used to create a line connecting two points. */
-export type SkruvReactLineSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGLineElement, {
+export type ReactSkruvLineSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGLineElement, {
   /**
    * Defines the x-axis coordinate of the line starting point.
    * 
@@ -3110,9 +2949,8 @@ export type SkruvReactLineSVGAttributes = util.AsyncContent<ReactSVGAttributes<S
   'pathLength'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <linearGradient> element lets authors define linear gradients to apply to other SVG elements. */
-export type SkruvReactLineargradientSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGLinearGradientElement, {
+export type ReactSkruvLineargradientSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGLinearGradientElement, {
   /**
    * This attribute defines the coordinate system for attributes x1, x2, y1, y2
    * 
@@ -3163,9 +3001,8 @@ export type SkruvReactLineargradientSVGAttributes = util.AsyncContent<ReactSVGAt
   'y2'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <marker> element defines a graphic used for drawing arrowheads or polymarkers on a given <path>, <line>, <polyline> or <polygon> element. */
-export type SkruvReactMarkerSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGMarkerElement, {
+export type ReactSkruvMarkerSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGMarkerElement, {
   /**
    * This attribute defines the height of the marker viewport.
    * 
@@ -3216,9 +3053,8 @@ export type SkruvReactMarkerSVGAttributes = util.AsyncContent<ReactSVGAttributes
   'viewBox'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <mask> element defines an alpha mask for compositing the current object into the background. A mask is used/referenced using the mask property. */
-export type SkruvReactMaskSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGMaskElement, {
+export type ReactSkruvMaskSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGMaskElement, {
   /**
    * This attribute defines the height of the masking area.
    * 
@@ -3257,17 +3093,14 @@ export type SkruvReactMaskSVGAttributes = util.AsyncContent<ReactSVGAttributes<S
   'width'?: number | string | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <metadata> SVG element adds metadata to SVG content. Metadata is structured information about data. The contents of <metadata> should be elements from other XML namespaces such as RDF, FOAF, etc. */
-export type SkruvReactMetadataSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGMetadataElement, {}>>
-
+export type ReactSkruvMetadataSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGMetadataElement, {}>>
 
 /** The <mpath> sub-element for the <animateMotion> element provides the ability to reference an external <path> element as the definition of a motion path. */
-export type SkruvReactMpathSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGMPathElement, {}>>
-
+export type ReactSkruvMpathSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGMPathElement, {}>>
 
 /** The <path> SVG element is the generic element to define a shape. All the basic shapes can be created with a path element. */
-export type SkruvReactPathSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGPathElement, {
+export type ReactSkruvPathSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGPathElement, {
   /**
    * This attribute defines the shape of the path.
    * 
@@ -3282,9 +3115,8 @@ export type SkruvReactPathSVGAttributes = util.AsyncContent<ReactSVGAttributes<S
   'pathLength'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <pattern> element defines a graphics object which can be redrawn at repeated x- and y-coordinate intervals ("tiled") to cover an area. */
-export type SkruvReactPatternSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGPatternElement, {
+export type ReactSkruvPatternSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGPatternElement, {
   /**
    * This attribute determines the height of the pattern tile.
    * 
@@ -3349,9 +3181,8 @@ export type SkruvReactPatternSVGAttributes = util.AsyncContent<ReactSVGAttribute
   'y'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <polygon> element defines a closed shape consisting of a set of connected straight line segments. The last point is connected to the first point. */
-export type SkruvReactPolygonSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGPolygonElement, {
+export type ReactSkruvPolygonSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGPolygonElement, {
   /**
    * This attribute defines the list of points (pairs of x,y absolute coordinates) required to draw the polygon.
    * 
@@ -3366,9 +3197,8 @@ export type SkruvReactPolygonSVGAttributes = util.AsyncContent<ReactSVGAttribute
   'pathLength'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <polyline> SVG element is an SVG basic shape that creates straight lines connecting several points. Typically a polyline is used to create open shapes as the last point doesn't have to be connected to the first point. For closed shapes see the <polygon> element. */
-export type SkruvReactPolylineSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGPolylineElement, {
+export type ReactSkruvPolylineSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGPolylineElement, {
   /**
    * This attribute defines the list of points (pairs of x,y absolute coordinates) required to draw the polyline
    * 
@@ -3383,9 +3213,8 @@ export type SkruvReactPolylineSVGAttributes = util.AsyncContent<ReactSVGAttribut
   'pathLength'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <radialGradient> element lets authors define radial gradients that can be applied to fill or stroke of graphical elements. */
-export type SkruvReactRadialgradientSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGRadialGradientElement, {
+export type ReactSkruvRadialgradientSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGRadialGradientElement, {
   /**
    * This attribute defines the x coordinate of the end circle of the radial gradient.
    * 
@@ -3448,9 +3277,8 @@ export type SkruvReactRadialgradientSVGAttributes = util.AsyncContent<ReactSVGAt
   'spreadMethod'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <rect> element is a basic SVG shape that draws rectangles, defined by their position, width, and height. The rectangles may have their corners rounded. */
-export type SkruvReactRectSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGRectElement, {
+export type ReactSkruvRectSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGRectElement, {
   /**
    * The x coordinate of the rect.
    * 
@@ -3495,9 +3323,8 @@ export type SkruvReactRectSVGAttributes = util.AsyncContent<ReactSVGAttributes<S
   'pathLength'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The SVG script element allows to add scripts to an SVG document. */
-export type SkruvReactScriptSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGScriptElement, {
+export type ReactSkruvScriptSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGScriptElement, {
   /**
    * This attribute defines CORS settings as define for the HTML <script> element.
    * 
@@ -3518,9 +3345,8 @@ export type SkruvReactScriptSVGAttributes = util.AsyncContent<ReactSVGAttributes
   'type'?: string | false
 }>>
 
-
 /** The SVG <set> element provides a simple means of just setting the value of an attribute for a specified duration. */
-export type SkruvReactSetSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGSetElement, {
+export type ReactSkruvSetSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGSetElement, {
   /**
    * This attribute defines the value to be applied to the target attribute for the duration of the animation. The value must match the requirements of the target attribute.
    * 
@@ -3529,9 +3355,8 @@ export type SkruvReactSetSVGAttributes = util.AsyncContent<ReactSVGAttributes<SV
   'to'?: string | number | boolean | false
 } & ReactSVGAnimationAttributes>>
 
-
 /** The SVG <stop> element defines a color and its position to use on a gradient. This element is always a child of a <linearGradient> or <radialGradient> element. */
-export type SkruvReactStopSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGStopElement, {
+export type ReactSkruvStopSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGStopElement, {
   /**
    * This attribute defines where the gradient stop is placed along the gradient vector.
    * 
@@ -3552,9 +3377,8 @@ export type SkruvReactStopSVGAttributes = util.AsyncContent<ReactSVGAttributes<S
   'stopopacity'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The SVG <style> element allows style sheets to be embedded directly within SVG content. */
-export type SkruvReactStyleSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGStyleElement, {
+export type ReactSkruvStyleSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGStyleElement, {
   /**
    * This attribute defines type of the style sheet language to use as a media type string.
    * 
@@ -3575,9 +3399,8 @@ export type SkruvReactStyleSVGAttributes = util.AsyncContent<ReactSVGAttributes<
   'title'?: string | false
 }>>
 
-
 /** The svg element is a container that defines a new coordinate system and viewport. It is used as the outermost element of SVG documents, but it can also be used to embed an SVG fragment inside an SVG or HTML document. */
-export type SkruvReactSvgSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGSVGElement, {
+export type ReactSkruvSvgSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGSVGElement, {
   /**
    * The minimum SVG language profile that the document requires.
    * 
@@ -3640,14 +3463,12 @@ export type SkruvReactSvgSVGAttributes = util.AsyncContent<ReactSVGAttributes<SV
   'y'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <switch> SVG element evaluates any requiredFeatures, requiredExtensions and systemLanguage attributes on its direct child elements in order, and then renders the first child where these attributes evaluate to true. */
-export type SkruvReactSwitchSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGSwitchElement, {
+export type ReactSkruvSwitchSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGSwitchElement, {
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <symbol> element is used to define graphical template objects which can be instantiated by a <use> element. */
-export type SkruvReactSymbolSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGSymbolElement, {
+export type ReactSkruvSymbolSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGSymbolElement, {
   /**
    * This attribute determines the height of the symbol.
    * 
@@ -3698,9 +3519,8 @@ export type SkruvReactSymbolSVGAttributes = util.AsyncContent<ReactSVGAttributes
   'y'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The SVG <text> element draws a graphics element consisting of text. It's possible to apply a gradient, pattern, clipping path, mask, or filter to <text>, like any other SVG graphics element. */
-export type SkruvReactTextSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGTextElement, {
+export type ReactSkruvTextSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGTextElement, {
   /**
    * The x coordinate of the starting point of the text baseline.
    * 
@@ -3745,9 +3565,8 @@ export type SkruvReactTextSVGAttributes = util.AsyncContent<ReactSVGAttributes<S
   'textLength'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** To render text along the shape of a <path>, enclose the text in a <textPath> element that has an href attribute with a reference to the <path> element. */
-export type SkruvReactTextpathSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGTextPathElement, {
+export type ReactSkruvTextpathSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGTextPathElement, {
   /**
    * The URL to the path or basic shape on which to render the text. If the path attribute is set, href has no effect.
    * 
@@ -3798,13 +3617,11 @@ export type SkruvReactTextpathSVGAttributes = util.AsyncContent<ReactSVGAttribut
   'textLength'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <title> element provides an accessible, short-text description of any SVG container element or graphics element. */
-export type SkruvReactTitleSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGTitleElement, {}>>
-
+export type ReactSkruvTitleSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGTitleElement, {}>>
 
 /** The SVG <tspan> element defines a subtext within a <text> element or another <tspan> element. It allows for adjustment of the style and/or position of that subtext as needed. */
-export type SkruvReactTspanSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGTSpanElement, {
+export type ReactSkruvTspanSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGTSpanElement, {
   /**
    * The x coordinate of the starting point of the text baseline.
    * 
@@ -3849,11 +3666,10 @@ export type SkruvReactTspanSVGAttributes = util.AsyncContent<ReactSVGAttributes<
   'textLength'?: string | number | boolean | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** The <use> element takes nodes from within the SVG document, and duplicates them somewhere else.
  * 
  * The effect is the same as if the nodes were deeply cloned into a non-exposed DOM, then pasted where the use element is, much like cloned template elements. */
-export type SkruvReactUseSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGUseElement, {
+export type ReactSkruvUseSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGUseElement, {
   /**
    * The URL to an element/fragment that needs to be duplicated.Value type: <URL> ; Default value: none; Animatable: yes
    */
@@ -3876,15 +3692,14 @@ export type SkruvReactUseSVGAttributes = util.AsyncContent<ReactSVGAttributes<SV
   'height'?: string | false
 } & ReactSVGPresentationAttributes>>
 
-
 /** A view is a defined way to view the image, like a zoom level or a detail view. */
-export type SkruvReactViewSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGViewElement, {
+export type ReactSkruvViewSVGAttributes = util.AsyncContent<ReactSVGAttributes<SVGViewElement, {
   'viewBox'?: string | number | boolean | false
   'preserveAspectRatio'?: string | number | boolean | false
 }>>
 
 /** The <math> MathML element is the top-level MathML element, used to write a single mathematical formula. It can be placed in HTML content where flow content is permitted. */
-export type SkruvReactMathMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMathMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * This enumerated attribute specifies how the enclosed MathML markup should be rendered. It can have one of the following values:
    * 
@@ -3897,9 +3712,8 @@ export type SkruvReactMathMathMLAttributes = util.AsyncContent<ReactMathMLAttrib
   'display'?: string | number | boolean | false
 }>>
 
-
 /** The <semantics> MathML element associates annotations with a MathML expression, for example its text source as a lightweight markup language or mathematical meaning expressed in a special XML dialect. Typically, its structure is: */
-export type SkruvReactSemanticsMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvSemanticsMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * The encoding of the semantic information in the annotation (e.g. "MathML-Content", "MathML-Presentation", "application/openmath+xml", "image/png")
    */
@@ -3910,19 +3724,16 @@ export type SkruvReactSemanticsMathMLAttributes = util.AsyncContent<ReactMathMLA
   'src'?: string | false
 }>>
 
-
 /** Non-standard: This feature is non-standard and is not on a standards track. Do not use it on production sites facing the Web: it will not work for every user. There may also be large incompatibilities between implementations and the behavior may change in the future. */
-export type SkruvReactMencloseMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMencloseMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * A list of notations, separated by white space, to apply to the child elements. The symbols are each drawn as if the others are not present, and therefore may overlap.
    */
   'notation'?: string | number | boolean | false
 }>>
 
-
 /** The <merror> MathML element is used to display contents as error messages. The intent of this element is to provide a standard way for programs that generate MathML from other input to report syntax errors. */
-export type SkruvReactMerrorMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
-
+export type ReactSkruvMerrorMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
 
 /** The <mfrac> MathML element is used to display fractions. It can also be used
  * 
@@ -3931,7 +3742,7 @@ export type SkruvReactMerrorMathMLAttributes = util.AsyncContent<ReactMathMLAttr
  * binomial coefficients
  * 
  * and Legendre symbols. */
-export type SkruvReactMfracMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMfracMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * The alignment of the denominator under the fraction. Possible values are: left, center (default), and right.
    */
@@ -3946,13 +3757,11 @@ export type SkruvReactMfracMathMLAttributes = util.AsyncContent<ReactMathMLAttri
   'numalign'?: string | number | boolean | false
 }>>
 
-
 /** The <mi> MathML element indicates that the content should be rendered as an identifier such as function names, variables or symbolic constants. You can also have arbitrary text in it to mark up terms. */
-export type SkruvReactMiMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
-
+export type ReactSkruvMiMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
 
 /** The <mmultiscripts> MathML element is used to attach an arbitrary number of subscripts and superscripts to an expression at once, generalizing the <msubsup> element. Scripts can be either prescripts (placed before the expression) or postscripts (placed after it). */
-export type SkruvReactMmultiscriptsMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMmultiscriptsMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * A <length-percentage> indicating the minimum amount to shift the baseline of the subscript down.
    */
@@ -3963,13 +3772,11 @@ export type SkruvReactMmultiscriptsMathMLAttributes = util.AsyncContent<ReactMat
   'superscriptshift'?: string | number | boolean | false
 }>>
 
-
 /** The <mn> MathML element represents a numeric literal which is normally a sequence of digits with a possible separator (a dot or a comma). However, it is also allowed to have arbitrary text in it which is actually a numeric quantity, for example "eleven". */
-export type SkruvReactMnMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
-
+export type ReactSkruvMnMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
 
 /** The <mo> MathML element represents an operator in a broad sense. Besides operators in strict mathematical meaning, this element also includes "operators" like parentheses, separators like comma and semicolon, or "absolute value" bars. */
-export type SkruvReactMoMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMoMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * A <boolean> indicating whether the operator should be treated as an accent when used as an under- or overscript (i.e. drawn bigger and closer to the base expression).
    */
@@ -4016,18 +3823,16 @@ export type SkruvReactMoMathMLAttributes = util.AsyncContent<ReactMathMLAttribut
   'symmetric'?: string | number | boolean | false
 }>>
 
-
 /** The <mover> MathML element is used to attach an accent or a limit over an expression. Use the following syntax: <mover> base overscript </mover> */
-export type SkruvReactMoverMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMoverMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * A <boolean> indicating whether the over script should be treated as an accent (i.e. drawn bigger and closer to the base expression).
    */
   'accent'?: string | number | boolean | false
 }>>
 
-
 /** The <mpadded> MathML element is used to add extra padding and to set the general adjustment of position and size of enclosed contents. */
-export type SkruvReactMpaddedMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMpaddedMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * A <length-percentage> indicating the desired depth (below the baseline) of the <mpadded> element.
    */
@@ -4050,21 +3855,17 @@ export type SkruvReactMpaddedMathMLAttributes = util.AsyncContent<ReactMathMLAtt
   'width'?: number | string | false
 }>>
 
-
 /** The <mphantom> MathML element is rendered invisibly, but dimensions (such as height, width, and baseline position) are still kept. */
-export type SkruvReactMphantomMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
-
+export type ReactSkruvMphantomMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
 
 /** The <mroot> MathML element is used to display roots with an explicit index. Two arguments are accepted, which leads to the syntax: <mroot> base index </mroot>. */
-export type SkruvReactMrootMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
-
+export type ReactSkruvMrootMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
 
 /** The <mrow> MathML element is used to group sub-expressions, which usually contain one or more operators with their respective operands (such as <mi> and <mn>). This element renders as a horizontal row containing its arguments. */
-export type SkruvReactMrowMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
-
+export type ReactSkruvMrowMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
 
 /** The <ms> MathML element represents a string literal meant to be interpreted by programming languages and computer algebra systems. */
-export type SkruvReactMsMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMsMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * The opening quote to enclose the content. The default value is &quot;.
    */
@@ -4075,9 +3876,8 @@ export type SkruvReactMsMathMLAttributes = util.AsyncContent<ReactMathMLAttribut
   'rquote'?: string | number | boolean | false
 }>>
 
-
 /** The <mspace> MathML element is used to display a blank space, whose size is set by its attributes. */
-export type SkruvReactMspaceMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMspaceMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * A <length-percentage> indicating the desired depth (below the baseline) of the space.
    */
@@ -4092,13 +3892,11 @@ export type SkruvReactMspaceMathMLAttributes = util.AsyncContent<ReactMathMLAttr
   'width'?: number | string | false
 }>>
 
-
 /** The <msqrt> MathML element is used to display square roots (no index is displayed). The square root accepts only one argument, which leads to the following syntax: <msqrt> base </msqrt>. */
-export type SkruvReactMsqrtMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
-
+export type ReactSkruvMsqrtMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
 
 /** The <mstyle> MathML element is used to change the style of its children. */
-export type SkruvReactMstyleMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMstyleMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * Specifies a minimum font size allowed due to changes in scriptlevel. The default value is 8pt.
    */
@@ -4109,27 +3907,24 @@ export type SkruvReactMstyleMathMLAttributes = util.AsyncContent<ReactMathMLAttr
   'scriptsizemultiplier'?: string | number | boolean | false
 }>>
 
-
 /** The <msub> MathML element is used to attach a subscript to an expression. */
-export type SkruvReactMsubMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMsubMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * A <length-percentage> indicating the minimum amount to shift the baseline of the subscript down.
    */
   'subscriptshift'?: string | number | boolean | false
 }>>
-
 
 /** The <msup> MathML element is used to attach a superscript to an expression. */
-export type SkruvReactMsupMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMsupMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * A <length-percentage> indicating the minimum amount to shift the baseline of the superscript up.
    */
   'superscriptshift'?: string | number | boolean | false
 }>>
 
-
 /** The <msubsup> MathML element is used to attach both a subscript and a superscript, together, to an expression. */
-export type SkruvReactMsubsupMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMsubsupMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * A <length-percentage> indicating the minimum amount to shift the baseline of the subscript down.
    */
@@ -4140,9 +3935,8 @@ export type SkruvReactMsubsupMathMLAttributes = util.AsyncContent<ReactMathMLAtt
   'superscriptshift'?: string | number | boolean | false
 }>>
 
-
 /** The <mtable> MathML element allows you to create tables or matrices. Its children are <mtr> elements (representing rows), each of them having <mtd> elements as its children (representing cells). These elements are similar to <table>, <tr> and <td> elements of HTML. */
-export type SkruvReactMtableMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMtableMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * Specifies the vertical alignment of the table with respect to its environment.
    * 
@@ -4199,9 +3993,8 @@ export type SkruvReactMtableMathMLAttributes = util.AsyncContent<ReactMathMLAttr
   'width'?: number | string | false
 }>>
 
-
 /** The <mtd> MathML element represents a cell in a table or a matrix. It may only appear in a <mtr> element. This element is similar to the <td> element of HTML. */
-export type SkruvReactMtdMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMtdMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * A non-negative integer value that indicates on how many columns does the cell extend.
    */
@@ -4224,13 +4017,11 @@ export type SkruvReactMtdMathMLAttributes = util.AsyncContent<ReactMathMLAttribu
   'rowalign'?: string | number | boolean | false
 }>>
 
-
 /** The <mtext> MathML element is used to render arbitrary text with no notational meaning, such as comments or annotations. */
-export type SkruvReactMtextMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
-
+export type ReactSkruvMtextMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {}>>
 
 /** The <mtr> MathML element represents a row in a table or a matrix. It may only appear in a <mtable> element and its children are <mtd> elements representing cells. This element is similar to the <tr> element of HTML. */
-export type SkruvReactMtrMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMtrMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * Overrides the horizontal alignment of cells specified by <mtable> for this row. Multiple values separated by space are allowed and apply to the corresponding columns (e.g. columnalign="left center right"). Possible values are: left, center and right.
    */
@@ -4241,18 +4032,16 @@ export type SkruvReactMtrMathMLAttributes = util.AsyncContent<ReactMathMLAttribu
   'rowalign'?: string | number | boolean | false
 }>>
 
-
 /** The <munder> MathML element is used to attach an accent or a limit under an expression. It uses the following syntax: <munder> base underscript </munder> */
-export type SkruvReactMunderMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMunderMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * A <boolean> indicating whether the under script should be treated as an accent (i.e. drawn bigger and closer to the base expression).
    */
   'accentunder'?: string | number | boolean | false
 }>>
 
-
 /** The <munderover> MathML element is used to attach accents or limits both under and over an expression. */
-export type SkruvReactMunderoverMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
+export type ReactSkruvMunderoverMathMLAttributes = util.AsyncContent<ReactMathMLAttributes<MathMLElement, {
   /**
    * A <boolean> indicating whether the over script should be treated as an accent (i.e. drawn bigger and closer to the base expression).
    */
@@ -4263,45 +4052,27 @@ export type SkruvReactMunderoverMathMLAttributes = util.AsyncContent<ReactMathML
   'accentunder'?: string | number | boolean | false
 }>>
 
-export type SkruvReactFeedAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
+export type ReactSkruvFeedAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
+export type ReactSkruvEntryAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
+export type ReactSkruvIdAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
-export type SkruvReactEntryAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
-
-
-
-export type SkruvReactIdAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
-
-
-
-export type SkruvReactTitleAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
+export type ReactSkruvTitleAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
   'type'?: string | false
 }>>
 
+export type ReactSkruvUpdatedAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
+export type ReactSkruvAuthorAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
-export type SkruvReactUpdatedAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
+export type ReactSkruvNameAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
+export type ReactSkruvUriAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
+export type ReactSkruvEmailAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
-export type SkruvReactAuthorAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
-
-
-
-export type SkruvReactNameAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
-
-
-
-export type SkruvReactUriAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
-
-
-
-export type SkruvReactEmailAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
-
-
-
-export type SkruvReactLinkAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
+export type ReactSkruvLinkAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
   'href'?: string | false
   'rel'?: string | false
   'type'?: string | false
@@ -4310,336 +4081,299 @@ export type SkruvReactLinkAtomAttributes = util.AsyncContent<ReactAtomAttributes
   'length'?: string | number | boolean | false
 }>>
 
-
-
-export type SkruvReactCategoryAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
+export type ReactSkruvCategoryAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
   'term'?: string | number | boolean | false
   'scheme'?: string | false
   'label'?: string | false
 }>>
 
+export type ReactSkruvContributorAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
-
-export type SkruvReactContributorAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
-
-
-
-export type SkruvReactGeneratorAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
+export type ReactSkruvGeneratorAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
   'uri'?: string | false
   'version'?: string | false
 }>>
 
+export type ReactSkruvIconAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
+export type ReactSkruvLogoAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
-export type SkruvReactIconAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
-
-
-
-export type SkruvReactLogoAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
-
-
-
-export type SkruvReactRightsAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
+export type ReactSkruvRightsAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
   'type'?: string | false
 }>>
 
+export type ReactSkruvSubtitleAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
-
-export type SkruvReactSubtitleAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
-
-
-
-export type SkruvReactContentAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
+export type ReactSkruvContentAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
   'type'?: string | false
   'src'?: string | false
 }>>
 
-
-
-export type SkruvReactSummaryAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
+export type ReactSkruvSummaryAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {
   'type'?: string | false
 }>>
 
+export type ReactSkruvPublishedAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
+export type ReactSkruvSourceAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
 
-export type SkruvReactPublishedAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
+export type ReactSkruvUrlsetSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
 
+export type ReactSkruvUrlSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
 
+export type ReactSkruvLocSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
 
-export type SkruvReactSourceAtomAttributes = util.AsyncContent<ReactAtomAttributes<Element, {}>>
+export type ReactSkruvLastmodSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
 
-export type SkruvReactUrlsetSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
+export type ReactSkruvChangefreqSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
 
+export type ReactSkruvPrioritySitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
 
+export type ReactSkruvSitemapindexSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
 
-export type SkruvReactUrlSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
+export type ReactSkruvSitemapSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
 
-
-
-export type SkruvReactLocSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
-
-
-
-export type SkruvReactLastmodSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
-
-
-
-export type SkruvReactChangefreqSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
-
-
-
-export type SkruvReactPrioritySitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
-
-
-
-export type SkruvReactSitemapindexSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
-
-
-
-export type SkruvReactSitemapSitemapAttributes = util.AsyncContent<ReactSitemapAttributes<Element, {}>>
+export type ReactSkruvMathHTMLAttributes = ReactSkruvMathMathMLAttributes
+export type ReactSkruvSvgHTMLAttributes = ReactSkruvSvgSVGAttributes
 
 export namespace JSX {
   export interface IntrinsicElements {
-    'html': SkruvReactHtmlHTMLAttributes
-    'base': SkruvReactBaseHTMLAttributes
-    'head': SkruvReactHeadHTMLAttributes
-    'title': SkruvReactTitleHTMLAttributes
-    'script': SkruvReactScriptHTMLAttributes
-    'style': SkruvReactStyleHTMLAttributes
-    'link': SkruvReactLinkHTMLAttributes
-    'meta': SkruvReactMetaHTMLAttributes
-    'body': SkruvReactBodyHTMLAttributes
-    'address': SkruvReactAddressHTMLAttributes
-    'article': SkruvReactArticleHTMLAttributes
-    'aside': SkruvReactAsideHTMLAttributes
-    'footer': SkruvReactFooterHTMLAttributes
-    'h1': SkruvReactH1HTMLAttributes
-    'h2': SkruvReactH2HTMLAttributes
-    'h3': SkruvReactH3HTMLAttributes
-    'h4': SkruvReactH4HTMLAttributes
-    'h5': SkruvReactH5HTMLAttributes
-    'h6': SkruvReactH6HTMLAttributes
-    'header': SkruvReactHeaderHTMLAttributes
-    'hgroup': SkruvReactHgroupHTMLAttributes
-    'main': SkruvReactMainHTMLAttributes
-    'nav': SkruvReactNavHTMLAttributes
-    'section': SkruvReactSectionHTMLAttributes
-    'search': SkruvReactSearchHTMLAttributes
-    'blockquote': SkruvReactBlockquoteHTMLAttributes
-    'cite': SkruvReactCiteHTMLAttributes
-    'dd': SkruvReactDdHTMLAttributes
-    'dt': SkruvReactDtHTMLAttributes
-    'dl': SkruvReactDlHTMLAttributes
-    'div': SkruvReactDivHTMLAttributes
-    'figcaption': SkruvReactFigcaptionHTMLAttributes
-    'figure': SkruvReactFigureHTMLAttributes
-    'hr': SkruvReactHrHTMLAttributes
-    'li': SkruvReactLiHTMLAttributes
-    'ol': SkruvReactOlHTMLAttributes
-    'ul': SkruvReactUlHTMLAttributes
-    'menu': SkruvReactMenuHTMLAttributes
-    'p': SkruvReactPHTMLAttributes
-    'pre': SkruvReactPreHTMLAttributes
-    'a': SkruvReactAHTMLAttributes
-    'abbr': SkruvReactAbbrHTMLAttributes
-    'b': SkruvReactBHTMLAttributes
-    'bdi': SkruvReactBdiHTMLAttributes
-    'bdo': SkruvReactBdoHTMLAttributes
-    'br': SkruvReactBrHTMLAttributes
-    'code': SkruvReactCodeHTMLAttributes
-    'data': SkruvReactDataHTMLAttributes
-    'dfn': SkruvReactDfnHTMLAttributes
-    'em': SkruvReactEmHTMLAttributes
-    'i': SkruvReactIHTMLAttributes
-    'kbd': SkruvReactKbdHTMLAttributes
-    'mark': SkruvReactMarkHTMLAttributes
-    'q': SkruvReactQHTMLAttributes
-    'rp': SkruvReactRpHTMLAttributes
-    'ruby': SkruvReactRubyHTMLAttributes
-    'rt': SkruvReactRtHTMLAttributes
-    's': SkruvReactSHTMLAttributes
-    'samp': SkruvReactSampHTMLAttributes
-    'small': SkruvReactSmallHTMLAttributes
-    'span': SkruvReactSpanHTMLAttributes
-    'strong': SkruvReactStrongHTMLAttributes
-    'sub': SkruvReactSubHTMLAttributes
-    'sup': SkruvReactSupHTMLAttributes
-    'time': SkruvReactTimeHTMLAttributes
-    'u': SkruvReactUHTMLAttributes
-    'var': SkruvReactVarHTMLAttributes
-    'wbr': SkruvReactWbrHTMLAttributes
-    'area': SkruvReactAreaHTMLAttributes
-    'audio': SkruvReactAudioHTMLAttributes
-    'img': SkruvReactImgHTMLAttributes
-    'map': SkruvReactMapHTMLAttributes
-    'track': SkruvReactTrackHTMLAttributes
-    'video': SkruvReactVideoHTMLAttributes
-    'embed': SkruvReactEmbedHTMLAttributes
-    'iframe': SkruvReactIframeHTMLAttributes
-    'object': SkruvReactObjectHTMLAttributes
-    'picture': SkruvReactPictureHTMLAttributes
-    'source': SkruvReactSourceHTMLAttributes
-    'portal': SkruvReactPortalHTMLAttributes
-    'canvas': SkruvReactCanvasHTMLAttributes
-    'noscript': SkruvReactNoscriptHTMLAttributes
-    'del': SkruvReactDelHTMLAttributes
-    'ins': SkruvReactInsHTMLAttributes
-    'caption': SkruvReactCaptionHTMLAttributes
-    'col': SkruvReactColHTMLAttributes
-    'colgroup': SkruvReactColgroupHTMLAttributes
-    'table': SkruvReactTableHTMLAttributes
-    'tbody': SkruvReactTbodyHTMLAttributes
-    'tr': SkruvReactTrHTMLAttributes
-    'td': SkruvReactTdHTMLAttributes
-    'tfoot': SkruvReactTfootHTMLAttributes
-    'th': SkruvReactThHTMLAttributes
-    'thead': SkruvReactTheadHTMLAttributes
-    'button': SkruvReactButtonHTMLAttributes
-    'datalist': SkruvReactDatalistHTMLAttributes
-    'option': SkruvReactOptionHTMLAttributes
-    'fieldset': SkruvReactFieldsetHTMLAttributes
-    'label': SkruvReactLabelHTMLAttributes
-    'form': SkruvReactFormHTMLAttributes
-    'input': SkruvReactInputHTMLAttributes
-    'legend': SkruvReactLegendHTMLAttributes
-    'meter': SkruvReactMeterHTMLAttributes
-    'optgroup': SkruvReactOptgroupHTMLAttributes
-    'select': SkruvReactSelectHTMLAttributes
-    'output': SkruvReactOutputHTMLAttributes
-    'progress': SkruvReactProgressHTMLAttributes
-    'textarea': SkruvReactTextareaHTMLAttributes
-    'details': SkruvReactDetailsHTMLAttributes
-    'summary': SkruvReactSummaryHTMLAttributes
-    'dialog': SkruvReactDialogHTMLAttributes
-    'slot': SkruvReactSlotHTMLAttributes
-    'template': SkruvReactTemplateHTMLAttributes
-    'svgA': SkruvReactASVGAttributes
-    'animate': SkruvReactAnimateSVGAttributes
-    'animateMotion': SkruvReactAnimatemotionSVGAttributes
-    'animateTransform': SkruvReactAnimatetransformSVGAttributes
-    'circle': SkruvReactCircleSVGAttributes
-    'clipPath': SkruvReactClippathSVGAttributes
-    'defs': SkruvReactDefsSVGAttributes
-    'desc': SkruvReactDescSVGAttributes
-    'ellipse': SkruvReactEllipseSVGAttributes
-    'feBlend': SkruvReactFeblendSVGAttributes
-    'feColorMatrix': SkruvReactFecolormatrixSVGAttributes
-    'feComponentTransfer': SkruvReactFecomponenttransferSVGAttributes
-    'feComposite': SkruvReactFecompositeSVGAttributes
-    'feConvolveMatrix': SkruvReactFeconvolvematrixSVGAttributes
-    'feDiffuseLighting': SkruvReactFediffuselightingSVGAttributes
-    'feDisplacementMap': SkruvReactFedisplacementmapSVGAttributes
-    'feDistantLight': SkruvReactFedistantlightSVGAttributes
-    'feDropShadow': SkruvReactFedropshadowSVGAttributes
-    'feFlood': SkruvReactFefloodSVGAttributes
-    'feFuncA': SkruvReactFefuncaSVGAttributes
-    'feFuncB': SkruvReactFefuncbSVGAttributes
-    'feFuncG': SkruvReactFefuncgSVGAttributes
-    'feFuncR': SkruvReactFefuncrSVGAttributes
-    'feGaussianBlur': SkruvReactFegaussianblurSVGAttributes
-    'feImage': SkruvReactFeimageSVGAttributes
-    'feMerge': SkruvReactFemergeSVGAttributes
-    'feMergeNode': SkruvReactFemergenodeSVGAttributes
-    'feMorphology': SkruvReactFemorphologySVGAttributes
-    'feOffset': SkruvReactFeoffsetSVGAttributes
-    'fePointLight': SkruvReactFepointlightSVGAttributes
-    'feSpecularLighting': SkruvReactFespecularlightingSVGAttributes
-    'feSpotLight': SkruvReactFespotlightSVGAttributes
-    'feTile': SkruvReactFetileSVGAttributes
-    'feTurbulence': SkruvReactFeturbulenceSVGAttributes
-    'filter': SkruvReactFilterSVGAttributes
-    'foreignObject': SkruvReactForeignobjectSVGAttributes
-    'g': SkruvReactGSVGAttributes
-    'image': SkruvReactImageSVGAttributes
-    'line': SkruvReactLineSVGAttributes
-    'linearGradient': SkruvReactLineargradientSVGAttributes
-    'marker': SkruvReactMarkerSVGAttributes
-    'mask': SkruvReactMaskSVGAttributes
-    'metadata': SkruvReactMetadataSVGAttributes
-    'mpath': SkruvReactMpathSVGAttributes
-    'path': SkruvReactPathSVGAttributes
-    'pattern': SkruvReactPatternSVGAttributes
-    'polygon': SkruvReactPolygonSVGAttributes
-    'polyline': SkruvReactPolylineSVGAttributes
-    'radialGradient': SkruvReactRadialgradientSVGAttributes
-    'rect': SkruvReactRectSVGAttributes
-    'svgScript': SkruvReactScriptSVGAttributes
-    'set': SkruvReactSetSVGAttributes
-    'stop': SkruvReactStopSVGAttributes
-    'svgStyle': SkruvReactStyleSVGAttributes
-    'svg': SkruvReactSvgSVGAttributes
-    'switch': SkruvReactSwitchSVGAttributes
-    'symbol': SkruvReactSymbolSVGAttributes
-    'text': SkruvReactTextSVGAttributes
-    'textPath': SkruvReactTextpathSVGAttributes
-    'svgTitle': SkruvReactTitleSVGAttributes
-    'tspan': SkruvReactTspanSVGAttributes
-    'use': SkruvReactUseSVGAttributes
-    'view': SkruvReactViewSVGAttributes
-    'math': SkruvReactMathMathMLAttributes
-    'semantics': SkruvReactSemanticsMathMLAttributes
-    'menclose': SkruvReactMencloseMathMLAttributes
-    'merror': SkruvReactMerrorMathMLAttributes
-    'mfrac': SkruvReactMfracMathMLAttributes
-    'mi': SkruvReactMiMathMLAttributes
-    'mmultiscripts': SkruvReactMmultiscriptsMathMLAttributes
-    'mn': SkruvReactMnMathMLAttributes
-    'mo': SkruvReactMoMathMLAttributes
-    'mover': SkruvReactMoverMathMLAttributes
-    'mpadded': SkruvReactMpaddedMathMLAttributes
-    'mphantom': SkruvReactMphantomMathMLAttributes
-    'mroot': SkruvReactMrootMathMLAttributes
-    'mrow': SkruvReactMrowMathMLAttributes
-    'ms': SkruvReactMsMathMLAttributes
-    'mspace': SkruvReactMspaceMathMLAttributes
-    'msqrt': SkruvReactMsqrtMathMLAttributes
-    'mstyle': SkruvReactMstyleMathMLAttributes
-    'msub': SkruvReactMsubMathMLAttributes
-    'msup': SkruvReactMsupMathMLAttributes
-    'msubsup': SkruvReactMsubsupMathMLAttributes
-    'mtable': SkruvReactMtableMathMLAttributes
-    'mtd': SkruvReactMtdMathMLAttributes
-    'mtext': SkruvReactMtextMathMLAttributes
-    'mtr': SkruvReactMtrMathMLAttributes
-    'munder': SkruvReactMunderMathMLAttributes
-    'munderover': SkruvReactMunderoverMathMLAttributes
-    'feed': SkruvReactFeedAtomAttributes
-    'entry': SkruvReactEntryAtomAttributes
-    'id': SkruvReactIdAtomAttributes
-    'atomTitle': SkruvReactTitleAtomAttributes
-    'updated': SkruvReactUpdatedAtomAttributes
-    'author': SkruvReactAuthorAtomAttributes
-    'name': SkruvReactNameAtomAttributes
-    'uri': SkruvReactUriAtomAttributes
-    'email': SkruvReactEmailAtomAttributes
-    'atomLink': SkruvReactLinkAtomAttributes
-    'category': SkruvReactCategoryAtomAttributes
-    'contributor': SkruvReactContributorAtomAttributes
-    'generator': SkruvReactGeneratorAtomAttributes
-    'icon': SkruvReactIconAtomAttributes
-    'logo': SkruvReactLogoAtomAttributes
-    'rights': SkruvReactRightsAtomAttributes
-    'subtitle': SkruvReactSubtitleAtomAttributes
-    'content': SkruvReactContentAtomAttributes
-    'atomSummary': SkruvReactSummaryAtomAttributes
-    'published': SkruvReactPublishedAtomAttributes
-    'atomSource': SkruvReactSourceAtomAttributes
-    'urlset': SkruvReactUrlsetSitemapAttributes
-    'url': SkruvReactUrlSitemapAttributes
-    'loc': SkruvReactLocSitemapAttributes
-    'lastmod': SkruvReactLastmodSitemapAttributes
-    'changefreq': SkruvReactChangefreqSitemapAttributes
-    'priority': SkruvReactPrioritySitemapAttributes
-    'sitemapindex': SkruvReactSitemapindexSitemapAttributes
-    'sitemap': SkruvReactSitemapSitemapAttributes
-    'skruvHeader': util.AsyncContent<{
-      'name': string | number
-      'value': string
-      isSkruvDom?: false
-    }>
-    'skruvComment': util.AsyncContent<{ isSkruvDom?: false }>
-    'skruvText': util.AsyncContent<{ isSkruvDom?: false }>
-    [elemName: string]: any
+    'html': ReactSkruvHtmlHTMLAttributes
+    'base': ReactSkruvBaseHTMLAttributes
+    'head': ReactSkruvHeadHTMLAttributes
+    'title': ReactSkruvTitleHTMLAttributes
+    'script': ReactSkruvScriptHTMLAttributes
+    'style': ReactSkruvStyleHTMLAttributes
+    'link': ReactSkruvLinkHTMLAttributes
+    'meta': ReactSkruvMetaHTMLAttributes
+    'body': ReactSkruvBodyHTMLAttributes
+    'address': ReactSkruvAddressHTMLAttributes
+    'article': ReactSkruvArticleHTMLAttributes
+    'aside': ReactSkruvAsideHTMLAttributes
+    'footer': ReactSkruvFooterHTMLAttributes
+    'h1': ReactSkruvH1HTMLAttributes
+    'h2': ReactSkruvH2HTMLAttributes
+    'h3': ReactSkruvH3HTMLAttributes
+    'h4': ReactSkruvH4HTMLAttributes
+    'h5': ReactSkruvH5HTMLAttributes
+    'h6': ReactSkruvH6HTMLAttributes
+    'header': ReactSkruvHeaderHTMLAttributes
+    'hgroup': ReactSkruvHgroupHTMLAttributes
+    'main': ReactSkruvMainHTMLAttributes
+    'nav': ReactSkruvNavHTMLAttributes
+    'section': ReactSkruvSectionHTMLAttributes
+    'search': ReactSkruvSearchHTMLAttributes
+    'blockquote': ReactSkruvBlockquoteHTMLAttributes
+    'cite': ReactSkruvCiteHTMLAttributes
+    'dd': ReactSkruvDdHTMLAttributes
+    'dt': ReactSkruvDtHTMLAttributes
+    'dl': ReactSkruvDlHTMLAttributes
+    'div': ReactSkruvDivHTMLAttributes
+    'figcaption': ReactSkruvFigcaptionHTMLAttributes
+    'figure': ReactSkruvFigureHTMLAttributes
+    'hr': ReactSkruvHrHTMLAttributes
+    'li': ReactSkruvLiHTMLAttributes
+    'ol': ReactSkruvOlHTMLAttributes
+    'ul': ReactSkruvUlHTMLAttributes
+    'menu': ReactSkruvMenuHTMLAttributes
+    'p': ReactSkruvPHTMLAttributes
+    'pre': ReactSkruvPreHTMLAttributes
+    'a': ReactSkruvAHTMLAttributes
+    'abbr': ReactSkruvAbbrHTMLAttributes
+    'b': ReactSkruvBHTMLAttributes
+    'bdi': ReactSkruvBdiHTMLAttributes
+    'bdo': ReactSkruvBdoHTMLAttributes
+    'br': ReactSkruvBrHTMLAttributes
+    'code': ReactSkruvCodeHTMLAttributes
+    'data': ReactSkruvDataHTMLAttributes
+    'dfn': ReactSkruvDfnHTMLAttributes
+    'em': ReactSkruvEmHTMLAttributes
+    'i': ReactSkruvIHTMLAttributes
+    'kbd': ReactSkruvKbdHTMLAttributes
+    'mark': ReactSkruvMarkHTMLAttributes
+    'q': ReactSkruvQHTMLAttributes
+    'rp': ReactSkruvRpHTMLAttributes
+    'ruby': ReactSkruvRubyHTMLAttributes
+    'rt': ReactSkruvRtHTMLAttributes
+    's': ReactSkruvSHTMLAttributes
+    'samp': ReactSkruvSampHTMLAttributes
+    'small': ReactSkruvSmallHTMLAttributes
+    'span': ReactSkruvSpanHTMLAttributes
+    'strong': ReactSkruvStrongHTMLAttributes
+    'sub': ReactSkruvSubHTMLAttributes
+    'sup': ReactSkruvSupHTMLAttributes
+    'time': ReactSkruvTimeHTMLAttributes
+    'u': ReactSkruvUHTMLAttributes
+    'var': ReactSkruvVarHTMLAttributes
+    'wbr': ReactSkruvWbrHTMLAttributes
+    'area': ReactSkruvAreaHTMLAttributes
+    'audio': ReactSkruvAudioHTMLAttributes
+    'img': ReactSkruvImgHTMLAttributes
+    'map': ReactSkruvMapHTMLAttributes
+    'track': ReactSkruvTrackHTMLAttributes
+    'video': ReactSkruvVideoHTMLAttributes
+    'embed': ReactSkruvEmbedHTMLAttributes
+    'iframe': ReactSkruvIframeHTMLAttributes
+    'object': ReactSkruvObjectHTMLAttributes
+    'picture': ReactSkruvPictureHTMLAttributes
+    'source': ReactSkruvSourceHTMLAttributes
+    'portal': ReactSkruvPortalHTMLAttributes
+    'canvas': ReactSkruvCanvasHTMLAttributes
+    'noscript': ReactSkruvNoscriptHTMLAttributes
+    'del': ReactSkruvDelHTMLAttributes
+    'ins': ReactSkruvInsHTMLAttributes
+    'caption': ReactSkruvCaptionHTMLAttributes
+    'col': ReactSkruvColHTMLAttributes
+    'colgroup': ReactSkruvColgroupHTMLAttributes
+    'table': ReactSkruvTableHTMLAttributes
+    'tbody': ReactSkruvTbodyHTMLAttributes
+    'tr': ReactSkruvTrHTMLAttributes
+    'td': ReactSkruvTdHTMLAttributes
+    'tfoot': ReactSkruvTfootHTMLAttributes
+    'th': ReactSkruvThHTMLAttributes
+    'thead': ReactSkruvTheadHTMLAttributes
+    'button': ReactSkruvButtonHTMLAttributes
+    'datalist': ReactSkruvDatalistHTMLAttributes
+    'option': ReactSkruvOptionHTMLAttributes
+    'fieldset': ReactSkruvFieldsetHTMLAttributes
+    'label': ReactSkruvLabelHTMLAttributes
+    'form': ReactSkruvFormHTMLAttributes
+    'input': ReactSkruvInputHTMLAttributes
+    'legend': ReactSkruvLegendHTMLAttributes
+    'meter': ReactSkruvMeterHTMLAttributes
+    'optgroup': ReactSkruvOptgroupHTMLAttributes
+    'select': ReactSkruvSelectHTMLAttributes
+    'output': ReactSkruvOutputHTMLAttributes
+    'progress': ReactSkruvProgressHTMLAttributes
+    'textarea': ReactSkruvTextareaHTMLAttributes
+    'details': ReactSkruvDetailsHTMLAttributes
+    'summary': ReactSkruvSummaryHTMLAttributes
+    'dialog': ReactSkruvDialogHTMLAttributes
+    'slot': ReactSkruvSlotHTMLAttributes
+    'template': ReactSkruvTemplateHTMLAttributes
+    'svgA': ReactSkruvASVGAttributes
+    'animate': ReactSkruvAnimateSVGAttributes
+    'animateMotion': ReactSkruvAnimatemotionSVGAttributes
+    'animateTransform': ReactSkruvAnimatetransformSVGAttributes
+    'circle': ReactSkruvCircleSVGAttributes
+    'clipPath': ReactSkruvClippathSVGAttributes
+    'defs': ReactSkruvDefsSVGAttributes
+    'desc': ReactSkruvDescSVGAttributes
+    'ellipse': ReactSkruvEllipseSVGAttributes
+    'feBlend': ReactSkruvFeblendSVGAttributes
+    'feColorMatrix': ReactSkruvFecolormatrixSVGAttributes
+    'feComponentTransfer': ReactSkruvFecomponenttransferSVGAttributes
+    'feComposite': ReactSkruvFecompositeSVGAttributes
+    'feConvolveMatrix': ReactSkruvFeconvolvematrixSVGAttributes
+    'feDiffuseLighting': ReactSkruvFediffuselightingSVGAttributes
+    'feDisplacementMap': ReactSkruvFedisplacementmapSVGAttributes
+    'feDistantLight': ReactSkruvFedistantlightSVGAttributes
+    'feDropShadow': ReactSkruvFedropshadowSVGAttributes
+    'feFlood': ReactSkruvFefloodSVGAttributes
+    'feFuncA': ReactSkruvFefuncaSVGAttributes
+    'feFuncB': ReactSkruvFefuncbSVGAttributes
+    'feFuncG': ReactSkruvFefuncgSVGAttributes
+    'feFuncR': ReactSkruvFefuncrSVGAttributes
+    'feGaussianBlur': ReactSkruvFegaussianblurSVGAttributes
+    'feImage': ReactSkruvFeimageSVGAttributes
+    'feMerge': ReactSkruvFemergeSVGAttributes
+    'feMergeNode': ReactSkruvFemergenodeSVGAttributes
+    'feMorphology': ReactSkruvFemorphologySVGAttributes
+    'feOffset': ReactSkruvFeoffsetSVGAttributes
+    'fePointLight': ReactSkruvFepointlightSVGAttributes
+    'feSpecularLighting': ReactSkruvFespecularlightingSVGAttributes
+    'feSpotLight': ReactSkruvFespotlightSVGAttributes
+    'feTile': ReactSkruvFetileSVGAttributes
+    'feTurbulence': ReactSkruvFeturbulenceSVGAttributes
+    'filter': ReactSkruvFilterSVGAttributes
+    'foreignObject': ReactSkruvForeignobjectSVGAttributes
+    'g': ReactSkruvGSVGAttributes
+    'image': ReactSkruvImageSVGAttributes
+    'line': ReactSkruvLineSVGAttributes
+    'linearGradient': ReactSkruvLineargradientSVGAttributes
+    'marker': ReactSkruvMarkerSVGAttributes
+    'mask': ReactSkruvMaskSVGAttributes
+    'metadata': ReactSkruvMetadataSVGAttributes
+    'mpath': ReactSkruvMpathSVGAttributes
+    'path': ReactSkruvPathSVGAttributes
+    'pattern': ReactSkruvPatternSVGAttributes
+    'polygon': ReactSkruvPolygonSVGAttributes
+    'polyline': ReactSkruvPolylineSVGAttributes
+    'radialGradient': ReactSkruvRadialgradientSVGAttributes
+    'rect': ReactSkruvRectSVGAttributes
+    'svgScript': ReactSkruvScriptSVGAttributes
+    'set': ReactSkruvSetSVGAttributes
+    'stop': ReactSkruvStopSVGAttributes
+    'svgStyle': ReactSkruvStyleSVGAttributes
+    'svg': ReactSkruvSvgSVGAttributes
+    'switch': ReactSkruvSwitchSVGAttributes
+    'symbol': ReactSkruvSymbolSVGAttributes
+    'text': ReactSkruvTextSVGAttributes
+    'textPath': ReactSkruvTextpathSVGAttributes
+    'svgTitle': ReactSkruvTitleSVGAttributes
+    'tspan': ReactSkruvTspanSVGAttributes
+    'use': ReactSkruvUseSVGAttributes
+    'view': ReactSkruvViewSVGAttributes
+    'math': ReactSkruvMathMathMLAttributes
+    'semantics': ReactSkruvSemanticsMathMLAttributes
+    'menclose': ReactSkruvMencloseMathMLAttributes
+    'merror': ReactSkruvMerrorMathMLAttributes
+    'mfrac': ReactSkruvMfracMathMLAttributes
+    'mi': ReactSkruvMiMathMLAttributes
+    'mmultiscripts': ReactSkruvMmultiscriptsMathMLAttributes
+    'mn': ReactSkruvMnMathMLAttributes
+    'mo': ReactSkruvMoMathMLAttributes
+    'mover': ReactSkruvMoverMathMLAttributes
+    'mpadded': ReactSkruvMpaddedMathMLAttributes
+    'mphantom': ReactSkruvMphantomMathMLAttributes
+    'mroot': ReactSkruvMrootMathMLAttributes
+    'mrow': ReactSkruvMrowMathMLAttributes
+    'ms': ReactSkruvMsMathMLAttributes
+    'mspace': ReactSkruvMspaceMathMLAttributes
+    'msqrt': ReactSkruvMsqrtMathMLAttributes
+    'mstyle': ReactSkruvMstyleMathMLAttributes
+    'msub': ReactSkruvMsubMathMLAttributes
+    'msup': ReactSkruvMsupMathMLAttributes
+    'msubsup': ReactSkruvMsubsupMathMLAttributes
+    'mtable': ReactSkruvMtableMathMLAttributes
+    'mtd': ReactSkruvMtdMathMLAttributes
+    'mtext': ReactSkruvMtextMathMLAttributes
+    'mtr': ReactSkruvMtrMathMLAttributes
+    'munder': ReactSkruvMunderMathMLAttributes
+    'munderover': ReactSkruvMunderoverMathMLAttributes
+    'feed': ReactSkruvFeedAtomAttributes
+    'entry': ReactSkruvEntryAtomAttributes
+    'id': ReactSkruvIdAtomAttributes
+    'atomTitle': ReactSkruvTitleAtomAttributes
+    'updated': ReactSkruvUpdatedAtomAttributes
+    'author': ReactSkruvAuthorAtomAttributes
+    'name': ReactSkruvNameAtomAttributes
+    'uri': ReactSkruvUriAtomAttributes
+    'email': ReactSkruvEmailAtomAttributes
+    'atomLink': ReactSkruvLinkAtomAttributes
+    'category': ReactSkruvCategoryAtomAttributes
+    'contributor': ReactSkruvContributorAtomAttributes
+    'generator': ReactSkruvGeneratorAtomAttributes
+    'icon': ReactSkruvIconAtomAttributes
+    'logo': ReactSkruvLogoAtomAttributes
+    'rights': ReactSkruvRightsAtomAttributes
+    'subtitle': ReactSkruvSubtitleAtomAttributes
+    'content': ReactSkruvContentAtomAttributes
+    'atomSummary': ReactSkruvSummaryAtomAttributes
+    'published': ReactSkruvPublishedAtomAttributes
+    'atomSource': ReactSkruvSourceAtomAttributes
+    'urlset': ReactSkruvUrlsetSitemapAttributes
+    'url': ReactSkruvUrlSitemapAttributes
+    'loc': ReactSkruvLocSitemapAttributes
+    'lastmod': ReactSkruvLastmodSitemapAttributes
+    'changefreq': ReactSkruvChangefreqSitemapAttributes
+    'priority': ReactSkruvPrioritySitemapAttributes
+    'sitemapindex': ReactSkruvSitemapindexSitemapAttributes
+    'sitemap': ReactSkruvSitemapSitemapAttributes
+    'skruvHeader': util.SkruvHeaderAttributes
+    'skruvComment': util.SkruvTextAttributes
+    'skruvText': util.SkruvTextAttributes
+    [elemName: string]: any;
   }
 }
 
@@ -4951,9 +4685,7 @@ const reactMappings = {
   onChange: 'oninput',
   onchange: 'oninput'
 }
-
 export const Fragment = '#fragment'
-
 const aliases = {
   'svgA': 'a',
   'svgScript': 'script',
@@ -4964,7 +4696,6 @@ const aliases = {
   'atomSummary': 'summary',
   'atomSource': 'source'
 }
-
 export const jsxs = (nodeName: string | Function, attributes = { children: [] }) => {
   // @ts-ignore
   nodeName = aliases[nodeName] || nodeName
@@ -4976,10 +4707,15 @@ export const jsxs = (nodeName: string | Function, attributes = { children: [] })
     Object.keys(attrs)
       .forEach(e => {
         if (e[0] === 'o' && e[1] === 'n' && e !== e.toLowerCase()) {
+          // @ts-ignore
           attrs[e.toLowerCase()] = attrs[e]
+          // @ts-ignore
           delete attrs[e]
+          // @ts-ignore
         } else if (reactMappings[e]) {
+          // @ts-ignore
           attrs[reactMappings[e]] = attrs[e]
+          // @ts-ignore
           delete attrs[e]
         }
       })
@@ -4987,5 +4723,4 @@ export const jsxs = (nodeName: string | Function, attributes = { children: [] })
   if (children) { return { isSkruvDom: true, t: nodeName, c: [attrs || {}, children] } }
   return { isSkruvDom: true, t: nodeName, c: [attrs || {}] }
 }
-
 export const jsx = jsxs
