@@ -1,8 +1,8 @@
 {
   "name": "@skruv/jsx-react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "dependencies": {
-    "skruv": "*"
+    "skruv": "^0.7.0"
   }
 }
